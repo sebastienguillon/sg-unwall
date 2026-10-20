@@ -93,11 +93,11 @@ async function measure(page) {
       htmlOverflow: hs.overflowY,
       bodyOverflow: bs.overflowY,
       bodyPosition: bs.position,
-      debug: document.documentElement.getAttribute("data-unwall-debug"),
-      hidden: [...document.querySelectorAll("[data-unwall-hidden]")].map(
-        (e) => `${e.getAttribute("data-unwall-hidden")}:${name(e)}`,
+      debug: document.documentElement.getAttribute("data-tacet-debug"),
+      hidden: [...document.querySelectorAll("[data-tacet-hidden]")].map(
+        (e) => `${e.getAttribute("data-tacet-hidden")}:${name(e)}`,
       ),
-      unlock: document.documentElement.getAttribute("data-unwall-unlock"),
+      unlock: document.documentElement.getAttribute("data-tacet-unlock"),
       mainText: Math.max(0, ...blocks.map((b) => b.innerText.length)),
     };
   });
@@ -121,7 +121,7 @@ async function measure(page) {
 async function injectScript() {
   const js = await readFile(join(EXT, "content/tacet.js"), "utf8");
   const css = await readFile(join(EXT, "content/tacet.css"), "utf8");
-  return `globalThis.__unwallTest = true; globalThis.__unwallNoSig = ${noSig};
+  return `globalThis.__tacetTest = true; globalThis.__tacetNoSig = ${noSig};
 (() => { const css = ${JSON.stringify(css)};
   const add = () => { const s = document.createElement('style'); s.textContent = css; document.documentElement.appendChild(s); };
   if (document.documentElement) add();
@@ -157,7 +157,7 @@ async function openContext(withExt) {
     if (withExt) await ctx.addInitScript({ content: await injectScript() });
     return { ctx, close: () => browser.close() };
   }
-  const dir = await mkdtemp(join(tmpdir(), "unwall-"));
+  const dir = await mkdtemp(join(tmpdir(), "tacet-"));
   const ctx = await chromium.launchPersistentContext(dir, {
     ...opts,
     channel: "chromium",
@@ -209,7 +209,7 @@ function format(url, base, un) {
       `  ${label.padEnd(9)} cover=${m.cover ?? "-"}  overflow=${m.htmlOverflow}/${m.bodyOverflow}${m.bodyPosition === "fixed" ? " body-fixed" : ""}  scrolled=${m.scrolled}px  main=${m.mainText}${m.error ? `  ERROR ${m.error}` : ""}`,
     );
   row("baseline", base);
-  row("unwall", un);
+  row("tacet", un);
   if (un.debug) {
     for (const a of JSON.parse(un.debug).actions) {
       lines.push(
@@ -233,7 +233,7 @@ await Promise.all(
       try {
         const [base, un] = await Promise.all([visit(url, false), visit(url, true)]);
         console.log(format(url, base, un));
-        report.push({ url, engine, mode, noSig, baseline: base, unwall: un });
+        report.push({ url, engine, mode, noSig, baseline: base, tacet: un });
       } catch (e) {
         console.log(`\n=== ${url}\n  FAILED ${e.message.split("\n")[0]}`);
       }

@@ -20,8 +20,8 @@
  */
 (() => {
   "use strict";
-  if (globalThis.__unwallLoaded) return;
-  globalThis.__unwallLoaded = true;
+  if (globalThis.__tacetLoaded) return;
+  globalThis.__tacetLoaded = true;
 
   const ext = globalThis.browser?.storage
     ? globalThis.browser
@@ -29,7 +29,7 @@
       ? globalThis.chrome
       : null;
   // Test harness mode: injected into the page world without extension APIs.
-  const TEST = !ext && globalThis.__unwallTest === true;
+  const TEST = !ext && globalThis.__tacetTest === true;
 
   const GESTURE_GRACE = 1500; // ms after a click during which new layers count as user-opened
   const OPENER_GRACE = 3000; // same, for controls that announce they open something (login, menu...)
@@ -73,7 +73,7 @@
   ];
   // The harness can switch signatures off to test the generic detection alone.
   const SIG_ALL =
-    TEST && globalThis.__unwallNoSig ? ":not(*)" : SIGNATURES.map((s) => s[1]).join(",");
+    TEST && globalThis.__tacetNoSig ? ":not(*)" : SIGNATURES.map((s) => s[1]).join(",");
 
   // [category, label, pattern] matched against lower-cased rendered text.
   const KEYWORDS = [
@@ -452,7 +452,7 @@
     }
     const prev = el.style.getPropertyValue("display");
     const prio = el.style.getPropertyPriority("display");
-    el.setAttribute("data-unwall-hidden", kind);
+    el.setAttribute("data-tacet-hidden", kind);
     // Inline as well: document CSS does not reach into shadow roots.
     el.style.setProperty("display", "none", "important");
     if (document.activeElement && el.contains(document.activeElement))
@@ -462,7 +462,7 @@
       el,
       { kind, reason, text: text.replace(/\s+/g, " ").trim().slice(0, 140) },
       () => {
-        el.removeAttribute("data-unwall-hidden");
+        el.removeAttribute("data-tacet-hidden");
         el.style.removeProperty("display");
         if (prev) el.style.setProperty("display", prev, prio);
       },
@@ -539,18 +539,18 @@
       const top = parseFloat(body.style.top || getComputedStyle(body).top);
       if (top < 0) restoreY = -top;
     }
-    const prev = html.getAttribute("data-unwall-unlock");
+    const prev = html.getAttribute("data-tacet-unlock");
     const merged = new Set([...(prev ? prev.split(" ") : []), ...info.tokens]);
     if (prev !== null && merged.size === prev.split(" ").length) return; // already overridden
-    html.setAttribute("data-unwall-unlock", [...merged].join(" "));
+    html.setAttribute("data-tacet-unlock", [...merged].join(" "));
     if (restoreY !== null) requestAnimationFrame(() => scrollTo(0, restoreY));
     record(
       "unlock",
       html,
       { kind: "scroll", reason: `${reason}: ${[...info.tokens].join(", ")}` },
       () => {
-        if (prev === null) html.removeAttribute("data-unwall-unlock");
-        else html.setAttribute("data-unwall-unlock", prev);
+        if (prev === null) html.removeAttribute("data-tacet-unlock");
+        else html.setAttribute("data-tacet-unlock", prev);
       },
     );
     log("unlocked", reason, [...info.tokens]);
@@ -642,20 +642,20 @@
         // Walls blur text; blurred backgrounds and gradient blobs have none.
         if (
           /blur\(/.test(cs.filter) &&
-          !c.hasAttribute("data-unwall-unblur") &&
+          !c.hasAttribute("data-tacet-unblur") &&
           c.textContent.trim().length > 100
         ) {
-          c.setAttribute("data-unwall-unblur", "");
-          freedOnce(c, "blur removed", () => c.removeAttribute("data-unwall-unblur"));
+          c.setAttribute("data-tacet-unblur", "");
+          freedOnce(c, "blur removed", () => c.removeAttribute("data-tacet-unblur"));
         }
         if (
           cs.pointerEvents === "none" &&
           cs.position !== "absolute" &&
-          !c.hasAttribute("data-unwall-unpe") &&
+          !c.hasAttribute("data-tacet-unpe") &&
           !overOtherContent(c, r)
         ) {
-          c.setAttribute("data-unwall-unpe", "");
-          freedOnce(c, "clicks re-enabled", () => c.removeAttribute("data-unwall-unpe"));
+          c.setAttribute("data-tacet-unpe", "");
+          freedOnce(c, "clicks re-enabled", () => c.removeAttribute("data-tacet-unpe"));
         }
         if (c.getAttribute("aria-hidden") === "true") {
           c.removeAttribute("aria-hidden");
@@ -864,9 +864,9 @@
         a.type === "hide" &&
         !a.undone &&
         a.el.isConnected &&
-        !a.el.hasAttribute("data-unwall-hidden")
+        !a.el.hasAttribute("data-tacet-hidden")
       ) {
-        a.el.setAttribute("data-unwall-hidden", a.kind);
+        a.el.setAttribute("data-tacet-hidden", a.kind);
         a.el.style.setProperty("display", "none", "important");
       }
     }
@@ -1028,7 +1028,7 @@
   function publish() {
     if (!settings.debug) return;
     try {
-      document.documentElement.setAttribute("data-unwall-debug", JSON.stringify(status()));
+      document.documentElement.setAttribute("data-tacet-debug", JSON.stringify(status()));
     } catch {
       /* ignore */
     }
@@ -1038,11 +1038,11 @@
     if (on === active) return;
     active = on;
     if (on) {
-      document.documentElement.removeAttribute("data-unwall-off");
+      document.documentElement.removeAttribute("data-tacet-off");
       schedule();
     } else {
       undoAll();
-      document.documentElement.setAttribute("data-unwall-off", "");
+      document.documentElement.setAttribute("data-tacet-off", "");
     }
   }
 
@@ -1156,12 +1156,12 @@
       ext.storage.local.get(["disabledHosts", "debug", "banners"]).then(applySettings, () => {});
     });
     ext.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
-      if (!msg || typeof msg.type !== "string" || !msg.type.startsWith("unwall:")) return;
-      if (msg.type === "unwall:zap") {
+      if (!msg || typeof msg.type !== "string" || !msg.type.startsWith("tacet:")) return;
+      if (msg.type === "tacet:zap") {
         active = true;
         scan(true);
       }
-      if (msg.type === "unwall:undo") {
+      if (msg.type === "tacet:undo") {
         undoAll();
         active = false;
       }
@@ -1169,7 +1169,7 @@
     });
   }
   if (TEST) {
-    globalThis.__unwall = { status, scan: () => scan(false), zap: () => scan(true), undo: undoAll };
+    globalThis.__tacet = { status, scan: () => scan(false), zap: () => scan(true), undo: undoAll };
   }
 
   start();

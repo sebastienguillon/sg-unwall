@@ -173,30 +173,30 @@ function setupDemo() {
     }, 700);
   };
 
-  // In test mode the script mirrors its status into <html data-unwall-debug>.
+  // In test mode the script mirrors its status into <html data-tacet-debug>.
   const watch = (doc) => {
     watcher?.disconnect();
     watcher = new MutationObserver(() => {
-      const raw = doc.documentElement.getAttribute("data-unwall-debug");
+      const raw = doc.documentElement.getAttribute("data-tacet-debug");
       if (raw) render(JSON.parse(raw).actions);
     });
     watcher.observe(doc.documentElement, {
       attributes: true,
-      attributeFilter: ["data-unwall-debug"],
+      attributeFilter: ["data-tacet-debug"],
     });
   };
 
   const turnOn = () => {
     const doc = frame.contentDocument;
     const win = frame.contentWindow;
-    if (!doc?.head || !win || win.__unwallLoaded) return;
+    if (!doc?.head || !win || win.__tacetLoaded) return;
     setState(true);
     list.replaceChildren();
     shown = 0;
     setCount("");
     status.textContent = T.running;
     watch(doc);
-    win.__unwallTest = true;
+    win.__tacetTest = true;
     const css = doc.createElement("link");
     css.rel = "stylesheet";
     css.href = "tacet.css";

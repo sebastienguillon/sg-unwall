@@ -14,10 +14,10 @@ const fixture = (name) => pathToFileURL(join(here, "fixtures", name)).href;
 const demoPage = (lang) => pathToFileURL(resolve(here, "../docs/demo", `${lang}.html`)).href;
 
 // Injected into the page world, where the extension APIs do not exist: the script
-// then runs in test mode and exposes globalThis.__unwall.
+// then runs in test mode and exposes globalThis.__tacet.
 const js = await readFile(join(SRC, "content/tacet.js"), "utf8");
 const css = await readFile(join(SRC, "content/tacet.css"), "utf8");
-const init = `globalThis.__unwallTest = true;
+const init = `globalThis.__tacetTest = true;
 (() => { const add = () => { const s = document.createElement('style'); s.textContent = ${JSON.stringify(css)}; document.documentElement.appendChild(s); };
   if (document.documentElement) add();
   else new MutationObserver((_, o) => { if (document.documentElement) { o.disconnect(); add(); } }).observe(document, { childList: true }); })();
@@ -92,7 +92,7 @@ for (const [engine, type] of [
     test("appshell.html: a full-screen app shell is left alone", async () => {
       await page.goto(fixture("appshell.html"));
       await page.waitForTimeout(3500);
-      const actions = await page.evaluate(() => globalThis.__unwall.status().actions);
+      const actions = await page.evaluate(() => globalThis.__tacet.status().actions);
       assert.deepEqual(
         actions.map((a) => a.what),
         [],

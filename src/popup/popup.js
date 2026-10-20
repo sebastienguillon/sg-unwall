@@ -48,7 +48,7 @@ function render(st) {
 }
 
 async function init() {
-  const st = await send("unwall:status");
+  const st = await send("tacet:status");
   const {
     disabledHosts = {},
     debug = false,
@@ -64,14 +64,14 @@ async function init() {
     if ($("site").checked) delete cur[st.host];
     else cur[st.host] = true;
     await api.storage.local.set({ disabledHosts: cur });
-    setTimeout(async () => render(await send("unwall:status")), 150);
+    setTimeout(async () => render(await send("tacet:status")), 150);
   });
   $("debug").addEventListener("change", () => api.storage.local.set({ debug: $("debug").checked }));
   $("banners").addEventListener("change", () =>
     api.storage.local.set({ banners: $("banners").checked }),
   );
-  $("zap").addEventListener("click", async () => render(await send("unwall:zap")));
-  $("undo").addEventListener("click", async () => render(await send("unwall:undo")));
+  $("zap").addEventListener("click", async () => render(await send("tacet:zap")));
+  $("undo").addEventListener("click", async () => render(await send("tacet:undo")));
 }
 
 init();

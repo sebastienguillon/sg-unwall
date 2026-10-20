@@ -36,7 +36,7 @@ await before.screenshot({
 });
 
 // 2. The same page with the extension, and the status it reports.
-const profile = await mkdtemp(join(tmpdir(), "unwall-shots-"));
+const profile = await mkdtemp(join(tmpdir(), "tacet-shots-"));
 const ctx = await chromium.launchPersistentContext(profile, {
   channel: "chromium",
   headless: true,
@@ -60,7 +60,7 @@ await ext.goto(`chrome-extension://${id}/popup/popup.html`);
 const status = await ext.evaluate(async () => {
   for (const tab of await chrome.tabs.query({})) {
     try {
-      const st = await chrome.tabs.sendMessage(tab.id, { type: "unwall:status" });
+      const st = await chrome.tabs.sendMessage(tab.id, { type: "tacet:status" });
       if (st) return st;
     } catch {
       // no content script in this tab

@@ -58,7 +58,7 @@ Open decisions:
 
 ## Brand Commitments
 
-- Name: **Tacet**, the word a musical score uses to tell an instrument to stay silent: the extension stays silent on the consent question. Chosen on 21 October 2026 over "Unwall", a name another wall-removing project already uses (github.com/kelesmert/unwall). The repository is `sebastienguillon/tacet` (renamed from `sg-unwall` the same day) and the website https://sebastienguillon.github.io/tacet/; the Firefox add-on ID is still `unwall@sebastienguillon`.
+- Name: **Tacet**, the word a musical score uses to tell an instrument to stay silent: the extension stays silent on the consent question. Chosen on 21 October 2026 over "Unwall", a name another wall-removing project already uses (github.com/kelesmert/unwall). The repository is `sebastienguillon/tacet` (renamed from `sg-unwall` the same day) and the website https://sebastienguillon.github.io/tacet/; the Firefox add-on ID is `tacet@sebastienguillon`.
 - Languages: the interface and the store listings are in English and French.
 - Author: Sébastien Guillon. License: MIT.
 
