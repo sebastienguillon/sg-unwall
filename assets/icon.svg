@@ -1,17 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <!-- A wall with a doorway, and the page you can read through it. -->
+  <!-- The multi-measure rest an orchestral part prints for a tacet passage. -->
   <rect width="128" height="128" rx="28" fill="#20231d"/>
+  <rect x="14" y="62" width="100" height="4" rx="2" fill="#5c6353"/>
   <g fill="#d5ed75">
-    <rect x="16" y="16" width="45" height="28" rx="4"/>
-    <rect x="67" y="16" width="45" height="28" rx="4"/>
-    <rect x="16" y="50" width="28" height="28" rx="4"/>
-    <rect x="84" y="50" width="28" height="28" rx="4"/>
-    <rect x="16" y="84" width="28" height="28" rx="4"/>
-    <rect x="84" y="84" width="28" height="28" rx="4"/>
-  </g>
-  <g fill="#f6f5ef">
-    <rect x="52" y="58" width="24" height="6" rx="3"/>
-    <rect x="52" y="72" width="24" height="6" rx="3"/>
-    <rect x="52" y="86" width="16" height="6" rx="3"/>
+    <rect x="22" y="38" width="8" height="52" rx="3"/>
+    <rect x="98" y="38" width="8" height="52" rx="3"/>
+    <rect x="28" y="50" width="72" height="28" rx="3"/>
   </g>
 </svg>

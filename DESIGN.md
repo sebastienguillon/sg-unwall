@@ -286,7 +286,7 @@ Soft, small corners on a ruled page. Controls use 8px corners, and panels (the i
 
 Lines come in three kinds. Pencil Hairline at 1px divides everything. A heavier 1.5px ink line marks headers and outlines: the register's column heads, the secondary button, the switch track. The 3px dashed line (2px on mobile) belongs only to unpressed keys, so a dashed edge always means "not pressed". The disclosure chevron is drawn from two 1.5px borders rotated 45°, not a glyph.
 
-The mark (`assets/icon.svg`) is an ink rounded square (28 on a 128 grid). Six lime bricks with 4px corners frame a doorway, and three paper text lines with round caps sit in the doorway: a wall with the page readable through it.
+The mark (`assets/icon.svg`) is an ink rounded square (28 on a 128 grid) carrying a lime multi-measure rest: a thick bar (72 by 28) between two end strokes (8 by 52), all with 3px corners, on one muted staff line (#5c6353, 4px). It is the sign an orchestral part prints for a passage marked tacet, so the name and the mark explain each other. One shape, so it holds at 16px.
 
 ## Components
 
