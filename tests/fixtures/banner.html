@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Unwall fixture: ordinary page with a cookie banner</title>
+    <!--
+  A vendor bottom banner (hidden by signature) on a page that uses inert, blur and
+  pointer-events: none for its own purposes. None of these may be touched.
+  ?flag adds a vendor class on <body>, as an unanswered CMP would, so the content
+  repair is armed and its own guards are what keeps the page intact.
+-->
+    <style>
+      body {
+        margin: 0;
+        font: 16px sans-serif;
+      }
+      header {
+        height: 60px;
+        background: #eee;
+      }
+      #onetrust-consent-sdk {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 120px;
+        background: #fff;
+        z-index: 1000;
+      }
+      #drawer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 80vw;
+        background: #fff;
+        transform: translateX(-100%);
+      }
+      #car {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+      }
+      .slide {
+        flex: 0 0 100%;
+        height: 60vh;
+      }
+      .hero {
+        display: grid;
+        height: 70vh;
+      }
+      .hero > * {
+        grid-area: 1 / 1;
+      }
+      .hero-text {
+        position: relative;
+        z-index: 1;
+        pointer-events: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .slider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ccd;
+      }
+      #results {
+        min-height: 80vh;
+      }
+      #results.is-updating {
+        filter: blur(2px);
+        pointer-events: none;
+      }
+      #results p {
+        height: 300px;
+        margin: 0;
+      }
+      #dd-menu {
+        position: fixed;
+        top: 60px;
+        left: 10px;
+        width: 200px;
+        background: #fff;
+        border: 1px solid #999;
+        pointer-events: auto;
+        z-index: 60;
+      }
+      main p.tall {
+        height: 1500px;
+      }
+    </style>
+  </head>
+  <body>
+    <header><button id="dd" aria-haspopup="menu">Compte</button></header>
+    <nav id="drawer" inert><a href="#">Rubrique 1</a><a href="#">Rubrique 2</a></nav>
+    <main>
+      <div class="hero">
+        <div class="slider"><button id="next">Diapo suivante</button></div>
+        <div class="hero-text">
+          <h1>
+            Les soldes commencent aujourd'hui dans tous nos magasins et en ligne, profitez-en vite
+          </h1>
+        </div>
+      </div>
+      <div id="car">
+        <div class="slide" id="s1">Diapo 1 : nouveautés de la semaine</div>
+        <div class="slide" id="s2" inert>Diapo 2 : <a href="#">voir</a></div>
+        <div class="slide" id="s3" inert>Diapo 3 : <a href="#">voir</a></div>
+      </div>
+      <button id="facet">Filtrer : en stock</button>
+      <section id="results">
+        <p>
+          Résultat 1 : chaussures de randonnée, imperméables, toutes tailles disponibles en magasin.
+        </p>
+        <p>Résultat 2</p>
+        <p>Résultat 3</p>
+      </section>
+      <p class="tall">Fin</p>
+    </main>
+    <div id="onetrust-consent-sdk">
+      <div>
+        Nous utilisons des cookies pour améliorer votre expérience. <button>Accepter</button>
+      </div>
+    </div>
+    <script>
+      if (location.search === "?flag") document.body.classList.add("cookie-consent-open");
+      // Faceted search: results blurred and frozen while they reload.
+      document.getElementById("facet").addEventListener("click", () => {
+        const r = document.getElementById("results");
+        r.classList.add("is-updating");
+        setTimeout(() => r.classList.remove("is-updating"), 2500);
+      });
+      // Radix-style modal dropdown: opens on pointerdown, blocks outside clicks via <body>.
+      document.getElementById("dd").addEventListener("pointerdown", () => {
+        const m = document.createElement("div");
+        m.id = "dd-menu";
+        m.setAttribute("role", "menu");
+        m.innerHTML = '<div role="menuitem">Profil</div><div role="menuitem">Déconnexion</div>';
+        document.body.appendChild(m);
+        document.body.style.pointerEvents = "none";
+      });
+    </script>
+  </body>
+</html>

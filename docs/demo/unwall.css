@@ -1,0 +1,39 @@
+/*
+ * Helper rules driven by attributes that content/unwall.js sets.
+ * The doubled :not(#\#) adds two ID-levels of specificity so these
+ * !important rules beat the page's own !important lock rules.
+ */
+
+[data-unwall-hidden]:not(#\#):not(#\#) {
+  display: none !important;
+}
+
+/* Scroll locks. The tokens are set on <html> by unlock(). */
+:root[data-unwall-unlock~="overflow"]:not(#\#):not(#\#),
+:root[data-unwall-unlock~="overflow"]:not(#\#):not(#\#) > body {
+  overflow-y: auto !important;
+}
+:root[data-unwall-unlock~="html-fixed"]:not(#\#):not(#\#) {
+  position: static !important;
+  top: auto !important;
+}
+:root[data-unwall-unlock~="body-fixed"]:not(#\#):not(#\#) > body {
+  position: static !important;
+  top: auto !important;
+}
+:root[data-unwall-unlock~="pointer"]:not(#\#):not(#\#),
+:root[data-unwall-unlock~="pointer"]:not(#\#):not(#\#) > body {
+  pointer-events: auto !important;
+}
+:root[data-unwall-unlock~="touch"]:not(#\#):not(#\#),
+:root[data-unwall-unlock~="touch"]:not(#\#):not(#\#) > body {
+  touch-action: auto !important;
+}
+
+/* Page content that a wall blurred or made unclickable. */
+[data-unwall-unblur]:not(#\#):not(#\#) {
+  filter: none !important;
+}
+[data-unwall-unpe]:not(#\#):not(#\#) {
+  pointer-events: auto !important;
+}

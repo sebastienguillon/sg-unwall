@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Unwall — read the page, not the consent wall</title>
+    <meta
+      name="description"
+      content="Unwall hides consent walls, cookie popups and the scroll locks they leave, without pressing Accept or Refuse. For Chrome and Firefox, in English and French."
+    />
+    <link rel="canonical" href="https://sebastienguillon.github.io/sg-unwall/" />
+    <link rel="alternate" hreflang="en" href="https://sebastienguillon.github.io/sg-unwall/" />
+    <link rel="alternate" hreflang="fr" href="https://sebastienguillon.github.io/sg-unwall/fr/" />
+    <link rel="icon" type="image/png" href="icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="theme-color" content="#20231d" />
+    <script src="site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header>
+      <div class="wrap">
+        <a class="brand" href="./"><img src="icon.png" width="36" height="36" alt="" />Unwall</a>
+        <nav aria-label="Main navigation">
+          <a href="./" aria-current="page">Overview</a><a href="privacy.html">Privacy</a
+          ><a href="support.html">Support</a
+          ><a class="lang" href="fr/" hreflang="fr" lang="fr">Français</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="wrap question" aria-labelledby="headline">
+        <h1 class="headline" id="headline">
+          <span class="unpressed"
+            ><span class="key">Accept all</span><span class="visually-hidden">, or </span
+            ><span class="key">Refuse</span><span class="visually-hidden">?</span></span
+          >
+          <span class="answer">Unwall presses <mark>neither.</mark></span>
+        </h1>
+        <div class="offer">
+          <p class="lead">
+            Unwall hides consent walls, cookie popups and the scroll locks they leave, so you can
+            read. The site’s consent tool stays unanswered, and trackers that wait for your consent
+            never get it.
+          </p>
+          <div class="install">
+            <a
+              class="button"
+              href="https://github.com/sebastienguillon/sg-unwall#install-locally-in-firefox"
+              >Install in Firefox</a
+            ><a
+              class="button secondary"
+              href="https://github.com/sebastienguillon/sg-unwall#install-locally-in-chrome"
+              >Install in Chrome</a
+            >
+            <p class="status">
+              Store releases are in preparation; until then, these buttons show how to load Unwall
+              from its source code. <a href="#tested">Tested on 47 walled pages</a>, from Le Monde
+              to Der Spiegel.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap demo-section" id="demo" aria-labelledby="demo-title">
+        <div class="demo-head">
+          <h2 id="demo-title">Try it on a made-up page.</h2>
+          <div class="switch-wrap">
+            <button
+              class="switch"
+              type="button"
+              role="switch"
+              aria-checked="false"
+              aria-label="Unwall on the made-up page"
+              hidden
+            >
+              <span aria-hidden="true">Unwall</span><span class="track" aria-hidden="true"></span
+              ><span class="state" aria-hidden="true">Off</span>
+            </button>
+            <span class="live-count" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="demo">
+          <figure class="frame">
+            <iframe
+              src="demo/en.html"
+              title="The Morning Ledger, a made-up news page behind a made-up consent wall"
+            ></iframe>
+            <figcaption>
+              The Morning Ledger is invented for this page, and so is its consent wall. Nothing you
+              click in it is recorded.
+            </figcaption>
+          </figure>
+          <aside class="readout" aria-labelledby="readout-title">
+            <div class="readout-top">
+              <b id="readout-title">Unwall</b><span class="count" aria-hidden="true"></span>
+            </div>
+            <p id="readout-status" role="status">
+              This panel lists what Unwall changes on the made-up page.
+            </p>
+            <noscript><p>Turn on JavaScript to run Unwall on this made-up page.</p></noscript>
+            <ol></ol>
+          </aside>
+        </div>
+      </section>
+
+      <section class="wrap section" aria-labelledby="layers-title">
+        <h2 id="layers-title">What Unwall clears away.</h2>
+        <p class="lead">
+          A consent wall is rarely one thing. Unwall removes each piece the site puts between you
+          and the page.
+        </p>
+        <ul class="layers">
+          <li>
+            <h3>The popup</h3>
+            <p>
+              The dialog that asks you to accept, in the middle of the page, in a corner or along
+              the bottom. Unwall recognises the consent tools sites use most, and finds the others
+              by their shape, their place on the page and their wording, in five languages.
+              <span class="where">In the demo: the white box in the middle.</span>
+            </p>
+          </li>
+          <li>
+            <h3>The backdrop</h3>
+            <p>
+              The dark or blurred layer stretched over the whole page, so that nothing behind it
+              answers a click.
+              <span class="where">In the demo: the dark veil over The Morning Ledger.</span>
+            </p>
+          </li>
+          <li>
+            <h3>The scroll lock</h3>
+            <p>
+              A rule that stops the page from scrolling, or freezes it in place. Unwall lifts it and
+              brings you back to where you were reading.
+              <span class="where">In the demo: try scrolling before you switch Unwall on.</span>
+            </p>
+          </li>
+          <li>
+            <h3>The blur</h3>
+            <p>
+              Some sites blur or disable the article itself until you answer. Unwall clears that
+              too, and leaves alone what a site blurs on purpose, such as the page behind a menu you
+              opened.
+              <span class="where">In the demo: the article text.</span>
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="wrap section" aria-labelledby="never-title">
+        <h2 id="never-title">It hides the question. It never answers it.</h2>
+        <ul class="never">
+          <li>
+            <strong>It never presses a button.</strong>
+            <p>
+              No Accept, no Refuse, no Settings. Unwall hides the question; it does not answer it
+              for you.
+            </p>
+          </li>
+          <li>
+            <strong>It never records a choice.</strong>
+            <p>
+              The consent tool stays unanswered, so it has no consent to pass on to its partners,
+              and the trackers that wait for it stay off.
+            </p>
+          </li>
+          <li>
+            <strong>It leaves alone what you opened.</strong>
+            <p>
+              A login form, a menu, a photo viewer or a newsletter form you clicked on stays where
+              it is, and so does the page behind it.
+            </p>
+          </li>
+          <li>
+            <strong>It steps aside when you ask for the settings.</strong>
+            <p>
+              Click a site’s “cookie settings” link and its own dialog comes back, for you to answer
+              as you choose.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="wrap section" id="tested" aria-labelledby="tested-title">
+        <h2 id="tested-title">Tested on 47 pages with a wall.</h2>
+        <p class="lead">
+          On 20 October 2026, Unwall ran in Chromium on 47 article and home pages that greet readers
+          with a consent wall. Every one ended up readable, and scrolling again where the wall had
+          locked it. It also ran on 16 sites without walls, such as Wikipedia, GitHub and Google
+          Maps, to check that it leaves working pages alone.
+        </p>
+        <div class="register-wrap">
+          <table class="register" role="table">
+            <caption>
+              Time: seconds from the start of the page until Unwall hid the wall. The names are the
+              sites’ and the consent tools’ own; Unwall is not affiliated with any of them.
+            </caption>
+            <thead role="rowgroup">
+              <tr role="row">
+                <th scope="col" role="columnheader">Site</th>
+                <th scope="col" role="columnheader" class="page-kind">Page</th>
+                <th scope="col" role="columnheader">Consent tool</th>
+                <th scope="col" role="columnheader">What Unwall did</th>
+                <th scope="col" role="columnheader" class="num">Hidden at</th>
+              </tr>
+            </thead>
+            <tbody role="rowgroup">
+              <tr role="row">
+                <td role="cell">20 Minutes</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.27 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">20 Minutes</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.59 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">actu.fr</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall</td>
+                <td role="cell" class="num">0.18 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">AlloCiné</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.13 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">BBC Afrique</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall</td>
+                <td role="cell" class="num">0.34 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">BFMTV</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.39 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">BFMTV</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.43 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">Capital</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.30 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">Challenges</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.03 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">CNN</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">OneTrust</td>
+                <td role="cell" class="did">Hid the wall</td>
+                <td role="cell" class="num">0.37 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Courrier international</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Site&#x27;s own</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.39 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Doctissimo</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.26 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">DW</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">consentmanager</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.52 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Euronews</td>
+                <td role="cell" class="page-kind">Article, 18 Oct.</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.65 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Euronews</td>
+                <td role="cell" class="page-kind">Article, 19 Oct.</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.42 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">L&#x27;Express</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">1.09 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">FAZ</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">1.38 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Femme Actuelle</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.31 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Figaro</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">AppConsent</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.24 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">France 24</td>
+                <td role="cell" class="page-kind">Article, English</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling, cleared the blur</td>
+                <td role="cell" class="num">0.53 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">France 24</td>
+                <td role="cell" class="page-kind">Article, French</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling, cleared the blur</td>
+                <td role="cell" class="num">0.47 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">France 3 Régions</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.26 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">franceinfo</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">1.16 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">The Guardian</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.21 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">heise online</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.17 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">HuffPost France</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Site&#x27;s own</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.14 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">HuffPost France</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Site&#x27;s own</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.17 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">L&#x27;Humanité</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Sirdata</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.13 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">The Independent</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.25 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Marmiton</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.29 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Mediapart</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Site&#x27;s own</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.19 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Monde</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Site&#x27;s own</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.27 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Monde</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Site&#x27;s own</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.46 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">NPR</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">OneTrust</td>
+                <td role="cell" class="did">Hid the wall</td>
+                <td role="cell" class="num">0.86 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Ouest-France</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.34 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Paris Match</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.18 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Parisien</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall</td>
+                <td role="cell" class="num">0.29 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Parisien</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall</td>
+                <td role="cell" class="num">1.02 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Progrès</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.45 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Public Sénat</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.12 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">RFI</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling, cleared the blur</td>
+                <td role="cell" class="num">0.42 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Der Spiegel</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.54 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Der Standard</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall</td>
+                <td role="cell" class="num">0.17 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Süddeutsche Zeitung</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.34 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">t-online</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.22 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">TF1 Info</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Hid the wall</td>
+                <td role="cell" class="num">0.27 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">WELT</td>
+                <td role="cell" class="page-kind">Home page</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Hid the wall, unlocked scrolling</td>
+                <td role="cell" class="num">0.54 s</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wrap privacy-note" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Nothing leaves<br />your browser.</h2>
+        <div>
+          <p>
+            Unwall has no server, no analytics and no account. It asks for a single permission,
+            storage, to remember on this device the sites where you switched it off and two
+            preferences. To find walls, it has to run on every site you visit, which your browser
+            shows as access to all websites.
+          </p>
+          <p>
+            It reads each page only to find walls, inside the page itself, and sends nothing
+            anywhere. <a href="privacy.html">Read exactly what it reads and keeps</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="wrap close" aria-labelledby="close-title">
+        <div class="close-text">
+          <h2 id="close-title">Read the code that reads your pages.</h2>
+          <p>
+            Unwall is open source under the MIT License. Everything it does on a page fits in one
+            script and one stylesheet, with tests for the walls it must remove and for the pages it
+            must leave alone.
+          </p>
+        </div>
+        <p class="links">
+          <a href="https://github.com/sebastienguillon/sg-unwall">Source code on GitHub</a
+          ><a href="https://github.com/sebastienguillon/sg-unwall/issues/new"
+            >Report a wall that got through</a
+          >
+        </p>
+        <div class="install">
+          <a
+            class="button"
+            href="https://github.com/sebastienguillon/sg-unwall#install-locally-in-firefox"
+            >Install in Firefox</a
+          ><a
+            class="button secondary"
+            href="https://github.com/sebastienguillon/sg-unwall#install-locally-in-chrome"
+            >Install in Chrome</a
+          >
+          <p class="status">Store releases in preparation.</p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">
+        <p>
+          Unwall is an independent project by Sébastien Guillon. It is not affiliated with the
+          websites or the consent tools named on this page.
+        </p>
+        <p>
+          <a href="privacy.html">Privacy policy</a> · <a href="support.html">Support</a> ·
+          <a href="https://github.com/sebastienguillon/sg-unwall">GitHub</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

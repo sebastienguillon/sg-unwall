@@ -1,0 +1,81 @@
+body {
+  font:
+    13px/1.4 system-ui,
+    sans-serif;
+  width: 340px;
+  margin: 0;
+  padding: 10px 12px;
+  color: #1f2937;
+}
+header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+header span {
+  color: #6b7280;
+  margin-left: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0;
+}
+.buttons {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0 6px;
+}
+button {
+  flex: 1;
+  padding: 5px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #f9fafb;
+  cursor: pointer;
+}
+button:hover {
+  background: #f3f4f6;
+}
+#state {
+  color: #6b7280;
+  margin: 6px 0;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 260px;
+  overflow: auto;
+}
+li {
+  border-top: 1px solid #e5e7eb;
+  padding: 5px 0;
+}
+li b {
+  font-weight: 600;
+}
+li code {
+  font-size: 11px;
+  color: #374151;
+  word-break: break-all;
+}
+li small {
+  display: block;
+  color: #6b7280;
+}
+.kind {
+  display: inline-block;
+  font-size: 11px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #e0f2fe;
+  color: #075985;
+  margin-right: 4px;
+}

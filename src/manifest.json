@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Unwall",
+  "version": "2026.10.20",
+  "description": "Removes consent walls and blocking popups, their overlays, and the scroll locks they leave on the page.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": ["storage"],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "run_at": "document_start",
+      "all_frames": false,
+      "css": ["content/unwall.css"],
+      "js": ["content/unwall.js"]
+    }
+  ],
+  "action": {
+    "default_title": "Unwall",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "unwall@sebastienguillon",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
+  }
+}

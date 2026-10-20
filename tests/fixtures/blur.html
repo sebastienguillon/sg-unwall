@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Unwall fixture: content blurred while the CMP is open</title>
+    <style>
+      body {
+        margin: 0;
+        font: 16px sans-serif;
+      }
+      header {
+        height: 80px;
+        background: #eee;
+      }
+      #feed p,
+      main p,
+      #late p {
+        height: 400px;
+        margin: 0;
+        border-bottom: 1px solid #ccc;
+      }
+      /* France 24 / RFI blur `body.didomi-popup-open > :not(#didomi-host)` while Didomi's notice is up. */
+      body.didomi-popup-open > main,
+      body.didomi-popup-open > #late {
+        filter: blur(2px);
+      }
+      body.didomi-popup-open {
+        overflow: hidden;
+      }
+      #didomi-host {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+      }
+      /* The site's own menu slides in and blurs the feed on purpose; closed, it stays rendered. */
+      #drawer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 320px;
+        background: #fff;
+        z-index: 50;
+        visibility: hidden;
+        transform: translateX(-100%);
+        transition:
+          transform 0.2s,
+          visibility 0.2s;
+      }
+      body.menu-open #drawer {
+        visibility: visible;
+        transform: none;
+      }
+      body.menu-open > #feed {
+        filter: blur(3px);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <button id="menu-btn" aria-expanded="false" aria-controls="drawer">Menu</button>
+    </header>
+    <main>
+      <p>
+        Une nouvelle journée de mobilisation a eu lieu mardi pour soutenir les lycéens. Au total,
+        480 000 personnes ont manifesté selon l'intersyndicale.
+      </p>
+      <p>2</p>
+    </main>
+    <section id="feed">
+      <p>
+        En continu : les dernières informations sur le mouvement lycéen, les blocages et les
+        cortèges dans toute la France.
+      </p>
+      <p>Feed 2</p>
+      <p>Feed 3</p>
+    </section>
+    <nav id="drawer"><button id="menu-close">Fermer</button> Rubriques</nav>
+    <script>
+      // Didomi inserts its host, fills it, then flags <body> once the notice is shown.
+      setTimeout(() => {
+        const host = document.createElement("div");
+        host.id = "didomi-host";
+        document.body.appendChild(host);
+        setTimeout(() => {
+          host.innerHTML = "<div>Nous et nos partenaires utilisons des cookies</div>";
+        }, 100);
+        setTimeout(() => document.body.classList.add("didomi-popup-open"), 600);
+      }, 100);
+      const btn = document.getElementById("menu-btn");
+      btn.addEventListener("click", () => {
+        document.body.classList.add("menu-open");
+        btn.setAttribute("aria-expanded", "true");
+      });
+      document.getElementById("menu-close").addEventListener("click", () => {
+        document.body.classList.remove("menu-open");
+        btn.setAttribute("aria-expanded", "false");
+      });
+      // Content rendered later (live blog, client-side render) under the same blur rule.
+      window.renderLate = () => {
+        const s = document.createElement("section");
+        s.id = "late";
+        s.innerHTML =
+          "<p>Mise à jour : les organisations étudiantes appellent à une nouvelle journée de mobilisation le 24 octobre.</p><p>2</p>";
+        document.body.appendChild(s);
+      };
+    </script>
+  </body>
+</html>

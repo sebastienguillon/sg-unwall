@@ -1,0 +1,18 @@
+.DS_Store
+node_modules/
+.pnpm-store/
+
+# Packages written by `pnpm package`
+web-ext-artifacts/
+
+# Screenshots and reports written by `pnpm probe`
+out/
+
+# Logs
+*.log
+pnpm-debug.log*
+
+# Impeccable scratch: decision mocks, review captures, question pages
+.impeccable/mocks/
+.impeccable/review/
+.impeccable/questions/

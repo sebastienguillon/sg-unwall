@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>App shell</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+      #app {
+        position: fixed;
+        inset: 0;
+        overflow: auto;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.98);
+      }
+      #app p {
+        height: 300px;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <nav><a href="#">Inbox</a> <a href="#">Sent</a></nav>
+      <main>
+        <p>Message 1 about cookies and privacy settings of your account</p>
+        <p>Message 2</p>
+        <p>Message 3</p>
+        <p>Message 4</p>
+      </main>
+    </div>
+    <script>
+      // body-fixed lock with saved scroll position, applied after a wall shows
+    </script>
+  </body>
+</html>

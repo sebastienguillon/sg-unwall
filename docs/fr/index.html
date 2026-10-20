@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Unwall — lisez la page, pas le mur de consentement</title>
+    <meta
+      name="description"
+      content="Unwall masque les murs de consentement, les fenêtres de cookies et le blocage du défilement qu’ils laissent, sans cliquer sur Accepter ni Refuser. Pour Chrome et Firefox, en français et en anglais."
+    />
+    <link rel="canonical" href="https://sebastienguillon.github.io/sg-unwall/fr/" />
+    <link rel="alternate" hreflang="en" href="https://sebastienguillon.github.io/sg-unwall/" />
+    <link rel="alternate" hreflang="fr" href="https://sebastienguillon.github.io/sg-unwall/fr/" />
+    <link rel="icon" type="image/png" href="../icon.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <meta name="theme-color" content="#20231d" />
+    <script src="../site.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Aller au contenu</a>
+    <header>
+      <div class="wrap">
+        <a class="brand" href="./"><img src="../icon.png" width="36" height="36" alt="" />Unwall</a>
+        <nav aria-label="Navigation principale">
+          <a href="./" aria-current="page">Présentation</a
+          ><a href="confidentialite.html">Confidentialité</a><a href="aide.html">Aide</a
+          ><a class="lang" href="../" hreflang="en" lang="en">English</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1">
+      <section class="wrap question" aria-labelledby="headline">
+        <h1 class="headline" id="headline">
+          <span class="unpressed"
+            ><span class="key">Tout accepter</span><span class="visually-hidden"> ou </span
+            ><span class="key">Refuser</span><span class="visually-hidden"> ?</span></span
+          >
+          <span class="answer">Unwall n’appuie sur <mark>aucun des deux.</mark></span>
+        </h1>
+        <div class="offer">
+          <p class="lead">
+            Unwall masque les murs de consentement, les fenêtres de cookies et le blocage du
+            défilement qu’ils laissent, pour que vous puissiez lire. L’outil de consentement du site
+            reste sans réponse, et les traceurs qui attendent votre accord ne l’obtiennent jamais.
+          </p>
+          <div class="install">
+            <a
+              class="button"
+              href="https://github.com/sebastienguillon/sg-unwall#install-locally-in-firefox"
+              >Installer dans Firefox</a
+            ><a
+              class="button secondary"
+              href="https://github.com/sebastienguillon/sg-unwall#install-locally-in-chrome"
+              >Installer dans Chrome</a
+            >
+            <p class="status">
+              Les versions des boutiques sont en préparation ; en attendant, ces boutons expliquent
+              comment charger Unwall depuis son code source.
+              <a href="#tested">Testé sur 47 pages avec un mur</a>, du Monde au Spiegel.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap demo-section" id="demo" aria-labelledby="demo-title">
+        <div class="demo-head">
+          <h2 id="demo-title">Essayez-le sur une page inventée.</h2>
+          <div class="switch-wrap">
+            <button
+              class="switch"
+              type="button"
+              role="switch"
+              aria-checked="false"
+              aria-label="Unwall sur la page inventée"
+              hidden
+            >
+              <span aria-hidden="true">Unwall</span><span class="track" aria-hidden="true"></span
+              ><span class="state" aria-hidden="true">Désactivé</span>
+            </button>
+            <span class="live-count" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="demo">
+          <figure class="frame">
+            <iframe
+              src="../demo/fr.html"
+              title="La Gazette du Matin, une page d’actualité inventée derrière un mur de consentement inventé"
+            ></iframe>
+            <figcaption>
+              La Gazette du Matin est inventée pour cette page, tout comme son mur de consentement.
+              Rien de ce que vous y cliquez n’est enregistré.
+            </figcaption>
+          </figure>
+          <aside class="readout" aria-labelledby="readout-title">
+            <div class="readout-top">
+              <b id="readout-title">Unwall</b><span class="count" aria-hidden="true"></span>
+            </div>
+            <p id="readout-status" role="status">
+              Ce panneau liste ce qu’Unwall change sur la page inventée.
+            </p>
+            <noscript
+              ><p>Activez JavaScript pour lancer Unwall sur cette page inventée.</p></noscript
+            >
+            <ol></ol>
+          </aside>
+        </div>
+      </section>
+
+      <section class="wrap section" aria-labelledby="layers-title">
+        <h2 id="layers-title">Ce qu’Unwall retire.</h2>
+        <p class="lead">
+          Un mur de consentement est rarement d’un seul tenant. Unwall retire chaque élément que le
+          site place entre vous et la page.
+        </p>
+        <ul class="layers">
+          <li>
+            <h3>La fenêtre</h3>
+            <p>
+              La boîte de dialogue qui vous demande d’accepter, au milieu de la page, dans un coin
+              ou en bas. Unwall reconnaît les outils de consentement les plus répandus, et repère
+              les autres à leur forme, à leur place sur la page et à leurs mots, en cinq langues.
+              <span class="where">Dans la démonstration : la boîte blanche au milieu.</span>
+            </p>
+          </li>
+          <li>
+            <h3>Le voile</h3>
+            <p>
+              La couche sombre ou floue tendue sur toute la page, pour que rien derrière ne réponde
+              aux clics.
+              <span class="where"
+                >Dans la démonstration : le voile sombre sur La Gazette du Matin.</span
+              >
+            </p>
+          </li>
+          <li>
+            <h3>Le blocage du défilement</h3>
+            <p>
+              Une règle qui empêche la page de défiler, ou la fige sur place. Unwall la lève et vous
+              ramène là où vous lisiez.
+              <span class="where"
+                >Dans la démonstration : essayez de faire défiler avant d’activer Unwall.</span
+              >
+            </p>
+          </li>
+          <li>
+            <h3>Le flou</h3>
+            <p>
+              Certains sites floutent ou désactivent l’article lui-même tant que vous n’avez pas
+              répondu. Unwall l’efface aussi, et laisse en place ce qu’un site floute exprès, comme
+              la page derrière un menu que vous avez ouvert.
+              <span class="where">Dans la démonstration : le texte de l’article.</span>
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="wrap section" aria-labelledby="never-title">
+        <h2 id="never-title">Il masque la question. Il n’y répond jamais.</h2>
+        <ul class="never">
+          <li>
+            <strong>Il n’appuie sur aucun bouton.</strong>
+            <p>
+              Ni Accepter, ni Refuser, ni Paramétrer. Unwall masque la question ; il n’y répond pas
+              à votre place.
+            </p>
+          </li>
+          <li>
+            <strong>Il n’enregistre aucun choix.</strong>
+            <p>
+              L’outil de consentement reste sans réponse : il n’a aucun accord à transmettre à ses
+              partenaires, et les traceurs qui l’attendent restent éteints.
+            </p>
+          </li>
+          <li>
+            <strong>Il laisse en place ce que vous avez ouvert.</strong>
+            <p>
+              Un formulaire de connexion, un menu, une visionneuse de photos ou un formulaire
+              d’inscription à une lettre d’information que vous avez ouvert reste là, tout comme la
+              page derrière.
+            </p>
+          </li>
+          <li>
+            <strong>Il s’efface quand vous demandez les réglages.</strong>
+            <p>
+              Cliquez sur le lien « Paramètres des cookies » d’un site et sa propre fenêtre revient,
+              pour que vous y répondiez comme vous l’entendez.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="wrap section" id="tested" aria-labelledby="tested-title">
+        <h2 id="tested-title">Testé sur 47 pages avec un mur.</h2>
+        <p class="lead">
+          Le 20 octobre 2026, Unwall a tourné dans Chromium sur 47 articles et pages d’accueil qui
+          accueillent leurs lecteurs avec un mur de consentement. Toutes sont devenues lisibles, et
+          ont retrouvé leur défilement quand le mur l’avait bloqué. Il a aussi tourné sur 16 sites
+          sans mur, comme Wikipédia, GitHub et Google Maps, pour vérifier qu’il laisse tranquilles
+          les pages qui fonctionnent.
+        </p>
+        <div class="register-wrap">
+          <table class="register" role="table">
+            <caption>
+              Temps : secondes écoulées entre le début de la page et le moment où Unwall a masqué le
+              mur. Les noms sont ceux des sites et des outils de consentement ; Unwall n’est lié à
+              aucun d’eux.
+            </caption>
+            <thead role="rowgroup">
+              <tr role="row">
+                <th scope="col" role="columnheader">Site</th>
+                <th scope="col" role="columnheader" class="page-kind">Page</th>
+                <th scope="col" role="columnheader">Outil de consentement</th>
+                <th scope="col" role="columnheader">Ce qu’Unwall a fait</th>
+                <th scope="col" role="columnheader" class="num">Masqué à</th>
+              </tr>
+            </thead>
+            <tbody role="rowgroup">
+              <tr role="row">
+                <td role="cell">20 Minutes</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,27 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">20 Minutes</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,59 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">actu.fr</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué</td>
+                <td role="cell" class="num">0,18 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">AlloCiné</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,13 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">BBC Afrique</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué</td>
+                <td role="cell" class="num">0,34 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">BFMTV</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,39 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">BFMTV</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,43 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">Capital</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,30 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">Challenges</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,03 s</td>
+              </tr>
+              <tr role="row">
+                <td role="cell">CNN</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">OneTrust</td>
+                <td role="cell" class="did">Mur masqué</td>
+                <td role="cell" class="num">0,37 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Courrier international</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Maison</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,39 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Doctissimo</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,26 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">DW</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">consentmanager</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,52 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Euronews</td>
+                <td role="cell" class="page-kind">Article du 18 oct.</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,65 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Euronews</td>
+                <td role="cell" class="page-kind">Article du 19 oct.</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,42 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">L&#x27;Express</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">1,09 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">FAZ</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">1,38 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Femme Actuelle</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,31 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Figaro</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">AppConsent</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,24 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">France 24</td>
+                <td role="cell" class="page-kind">Article en anglais</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué, flou retiré</td>
+                <td role="cell" class="num">0,53 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">France 24</td>
+                <td role="cell" class="page-kind">Article en français</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué, flou retiré</td>
+                <td role="cell" class="num">0,47 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">France 3 Régions</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,26 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">franceinfo</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">1,16 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">The Guardian</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,21 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">heise online</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,17 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">HuffPost France</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Maison</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,14 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">HuffPost France</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Maison</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,17 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">L&#x27;Humanité</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Sirdata</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,13 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">The Independent</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,25 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Marmiton</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,29 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Mediapart</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Maison</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,19 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Monde</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Maison</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,27 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Monde</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Maison</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,46 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">NPR</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">OneTrust</td>
+                <td role="cell" class="did">Mur masqué</td>
+                <td role="cell" class="num">0,86 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Ouest-France</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,34 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Paris Match</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,18 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Parisien</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué</td>
+                <td role="cell" class="num">0,29 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Parisien</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué</td>
+                <td role="cell" class="num">1,02 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Le Progrès</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,45 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Public Sénat</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,12 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">RFI</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué, flou retiré</td>
+                <td role="cell" class="num">0,42 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Der Spiegel</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,54 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Der Standard</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué</td>
+                <td role="cell" class="num">0,17 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">Süddeutsche Zeitung</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,34 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">t-online</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,22 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">TF1 Info</td>
+                <td role="cell" class="page-kind">Article</td>
+                <td role="cell">Didomi</td>
+                <td role="cell" class="did">Mur masqué</td>
+                <td role="cell" class="num">0,27 s</td>
+              </tr>
+              <tr role="row" class="extra">
+                <td role="cell">WELT</td>
+                <td role="cell" class="page-kind">Accueil</td>
+                <td role="cell">Sourcepoint</td>
+                <td role="cell" class="did">Mur masqué, défilement débloqué</td>
+                <td role="cell" class="num">0,54 s</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wrap privacy-note" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Rien ne quitte<br />votre navigateur.</h2>
+        <div>
+          <p>
+            Unwall n’a ni serveur, ni statistiques, ni compte. Il demande une seule autorisation, le
+            stockage, pour retenir sur cet appareil les sites où vous l’avez désactivé et deux
+            préférences. Pour trouver les murs, il doit s’exécuter sur tous les sites que vous
+            visitez, ce que votre navigateur présente comme un accès à tous les sites web.
+          </p>
+          <p>
+            Il lit chaque page uniquement pour y trouver des murs, dans la page elle-même, et
+            n’envoie rien nulle part.
+            <a href="confidentialite.html">Lire exactement ce qu’il lit et ce qu’il conserve</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="wrap close" aria-labelledby="close-title">
+        <div class="close-text">
+          <h2 id="close-title">Lisez le code qui lit vos pages.</h2>
+          <p>
+            Unwall est un logiciel libre sous licence MIT. Tout ce qu’il fait sur une page tient
+            dans un script et une feuille de style, avec des tests pour les murs qu’il doit retirer
+            et pour les pages qu’il doit laisser tranquilles.
+          </p>
+        </div>
+        <p class="links">
+          <a href="https://github.com/sebastienguillon/sg-unwall">Code source sur GitHub</a
+          ><a href="https://github.com/sebastienguillon/sg-unwall/issues/new"
+            >Signaler un mur qui est passé</a
+          >
+        </p>
+        <div class="install">
+          <a
+            class="button"
+            href="https://github.com/sebastienguillon/sg-unwall#install-locally-in-firefox"
+            >Installer dans Firefox</a
+          ><a
+            class="button secondary"
+            href="https://github.com/sebastienguillon/sg-unwall#install-locally-in-chrome"
+            >Installer dans Chrome</a
+          >
+          <p class="status">Versions des boutiques en préparation.</p>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">
+        <p>
+          Unwall est un projet indépendant de Sébastien Guillon. Il n’est lié à aucun des sites ni
+          des outils de consentement cités sur cette page.
+        </p>
+        <p>
+          <a href="confidentialite.html">Politique de confidentialité</a> ·
+          <a href="aide.html">Aide</a> ·
+          <a href="https://github.com/sebastienguillon/sg-unwall">GitHub</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

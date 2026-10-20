@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Unwall fixtures</title>
+    <style>
+      body {
+        margin: 0;
+        font: 16px sans-serif;
+      }
+      .content p {
+        height: 400px;
+        margin: 0;
+        border-bottom: 1px solid #ccc;
+      }
+      .veil {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .box {
+        background: #fff;
+        padding: 20px;
+        width: 420px;
+      }
+      body.locked {
+        position: fixed;
+        width: 100%;
+      }
+      html.no-scroll {
+        overflow: hidden;
+      }
+      #menu {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 300;
+      }
+      #menu a {
+        display: block;
+      }
+      #lightbox {
+        display: none;
+      }
+      #lightbox.open {
+        display: flex;
+      }
+      #didomi-host {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. consent wall present at load, with scroll lock -->
+    <div id="wall" class="veil">
+      <div class="box" role="dialog" aria-modal="true">
+        Nous et nos partenaires utilisons des cookies. Accédez gratuitement en acceptant, ou
+        abonnez-vous pour 2€ par mois.
+        <button>Tout accepter</button><button>Paramétrer</button>
+      </div>
+    </div>
+
+    <!-- 4. closed menu: full screen, click-through, aria-hidden -->
+    <nav id="menu" aria-hidden="true"><a href="#">Newsletters</a><a href="#">Direct</a></nav>
+
+    <!-- 2. user-opened lightbox -->
+    <div id="lightbox" class="veil">
+      <div class="box">Photo 1/12 <button id="close-lb">Fermer</button></div>
+    </div>
+
+    <!-- 8. vendor container (signature) + a cookie-settings link -->
+    <div id="didomi-host"><div class="box">Paramètres des cookies et partenaires</div></div>
+
+    <main class="content">
+      <button id="open-lb">Voir les photos</button>
+      <a href="javascript:void(0)" id="cookie-settings">Modifier mes choix cookies</a>
+      <button id="login">Se connecter</button>
+      <p>1</p>
+      <p>2</p>
+      <p>3</p>
+      <p>4</p>
+      <p>5</p>
+      <p>6</p>
+    </main>
+
+    <script>
+      // Scroll lock the way body-scroll-lock libraries do it.
+      scrollTo(0, 0);
+      document.documentElement.classList.add("no-scroll");
+      document
+        .getElementById("open-lb")
+        .addEventListener("click", () => document.getElementById("lightbox").classList.add("open"));
+      document
+        .getElementById("close-lb")
+        .addEventListener("click", () =>
+          document.getElementById("lightbox").classList.remove("open"),
+        );
+
+      // 9. login modal that waits on the network for 1.2 s after the click
+      document.getElementById("login").addEventListener("click", () =>
+        setTimeout(() => {
+          const d = document.createElement("div");
+          d.id = "login-modal";
+          d.className = "veil";
+          d.innerHTML =
+            '<div class="box" role="dialog">Connectez-vous ou créez un compte <input type="email"> <button id="close-login">Fermer</button></div>';
+          document.body.appendChild(d);
+          document.getElementById("close-login").addEventListener("click", () => d.remove());
+        }, 1200),
+      );
+
+      // 3. newsletter popup 3 s after load, no user action
+      setTimeout(() => {
+        const d = document.createElement("div");
+        d.id = "newsletter";
+        d.className = "veil";
+        d.innerHTML =
+          '<div class="box">Inscrivez-vous à notre newsletter <input type="email" placeholder="Votre e-mail"> <button>Non merci</button></div>';
+        document.body.appendChild(d);
+      }, 3000);
+
+      // 5. modal <dialog> at load
+      const dlg = document.createElement("dialog");
+      dlg.id = "modal-dialog";
+      dlg.textContent = "Continuer la lecture : réservé aux abonnés. Abonnez-vous pour 1€.";
+      document.body.appendChild(dlg);
+      dlg.showModal();
+    </script>
+  </body>
+</html>

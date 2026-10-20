@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "env": {
+    "browser": true,
+    "webextensions": true
+  },
+  "overrides": [
+    {
+      "files": ["scripts/**/*.mjs", "tests/**/*.mjs"],
+      "env": {
+        "browser": false,
+        "node": true,
+        "webextensions": false
+      }
+    }
+  ]
+}

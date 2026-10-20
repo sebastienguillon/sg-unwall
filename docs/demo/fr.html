@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr" class="cmp-open">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>La Gazette du Matin, un journal inventé pour la démonstration d’Unwall</title>
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body class="cmp-open">
+    <header class="paper-head">
+      <p class="name">La Gazette du Matin</p>
+      <p class="date">Mardi 20 octobre · Journal inventé</p>
+      <nav aria-label="Rubriques">
+        <span>Ville</span><span>Région</span><span>Économie</span><span>Culture</span
+        ><span>Sport</span>
+      </nav>
+    </header>
+    <main>
+      <h1>Le conseil municipal vote la réouverture du marché des quais</h1>
+      <p class="standfirst">
+        Après quatre ans derrière des palissades, la halle du quai accueillera de nouveau des
+        commerçants dès le printemps, avec moins d’étals et des horaires plus longs.
+      </p>
+      <p class="byline">Par Anna Wolde · 6 min de lecture</p>
+      <p>
+        Le vote est intervenu tard lundi soir, après trois heures de débat, devant une tribune si
+        pleine que les retardataires écoutaient depuis l’escalier. Vingt-neuf élus ont voté pour la
+        réouverture, huit contre, et quatre se sont abstenus.
+      </p>
+      <p>
+        La halle avait fermé à l’automne 2022, quand les inspecteurs avaient découvert que deux de
+        ses arches en fer étaient rongées par la rouille. Les travaux ont coûté plus que prévu, et
+        la ville a un temps envisagé de vendre le terrain.
+      </p>
+      <h2>Moins d’étals, des soirées plus longues</h2>
+      <p>
+        Le nouveau projet conserve quatre-vingts étals sur les cent douze d’origine. L’espace libéré
+        côté fleuve devient une place couverte avec des tables, ouverte jusqu’à 22 heures du jeudi
+        au samedi.
+      </p>
+      <blockquote>
+        « Nous ne reconstruisons pas un musée. Nous voulons que les gens reviennent sur le quai
+        après le travail. »
+      </blockquote>
+      <p>
+        Les commerçants qui avaient un emplacement avant la fermeture seront prioritaires. Les
+        emplacements restants seront tirés au sort en février, dont un quart réservé aux producteurs
+        installés à moins de trente kilomètres.
+      </p>
+      <h2>La suite</h2>
+      <p>
+        Le chantier de la toiture reprend en novembre. Si l’hiver est doux, le premier jour de
+        marché est prévu le deuxième samedi d’avril.
+      </p>
+      <p>
+        La Gazette du Matin, sa ville, son conseil municipal et son marché sont inventés pour la
+        démonstration d’Unwall, tout comme le mur de consentement devant cet article.
+      </p>
+    </main>
+    <div class="consent-layer" id="ledger-consent">
+      <div class="consent" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+        <h2 id="consent-title">Nous respectons votre vie privée</h2>
+        <p>
+          Nous et nos 842 partenaires stockons et consultons des informations sur votre appareil,
+          comme des cookies, pour mesurer l’audience, personnaliser les publicités et les contenus,
+          et développer nos services.
+        </p>
+        <p>
+          Acceptez tout pour lire La Gazette du Matin gratuitement, ou refusez et abonnez-vous pour
+          2 € par mois. Votre choix est valable 13 mois.
+        </p>
+        <div class="choices">
+          <button type="button">Refuser et s’abonner</button>
+          <button type="button">Paramétrer</button>
+          <button type="button" class="primary">Tout accepter</button>
+        </div>
+        <p class="made-up">Mur de consentement inventé · démonstration</p>
+        <p class="note" hidden>
+          Ce mur est inventé : aucun choix n’est enregistré, et il reste là jusqu’à ce qu’Unwall le
+          retire.
+        </p>
+      </div>
+    </div>
+    <script>
+      for (const b of document.querySelectorAll(".consent button")) {
+        b.addEventListener("click", () => {
+          document.querySelector(".consent .note").hidden = false;
+        });
+      }
+    </script>
+  </body>
+</html>

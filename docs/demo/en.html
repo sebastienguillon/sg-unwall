@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" class="cmp-open">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>The Morning Ledger, a made-up newspaper for the Unwall demo</title>
+    <link rel="stylesheet" href="demo.css" />
+  </head>
+  <body class="cmp-open">
+    <header class="paper-head">
+      <p class="name">The Morning Ledger</p>
+      <p class="date">Tuesday 20 October · Made-up newspaper</p>
+      <nav aria-label="Sections">
+        <span>City</span><span>Region</span><span>Business</span><span>Culture</span
+        ><span>Sport</span>
+      </nav>
+    </header>
+    <main>
+      <h1>Council votes to reopen the riverside market</h1>
+      <p class="standfirst">
+        After four years behind fences, the covered market on the quay will host traders again from
+        the spring, with a smaller hall and longer opening hours.
+      </p>
+      <p class="byline">By Anna Wolde · 6 min read</p>
+      <p>
+        The vote came late on Monday, after a three-hour debate and a public gallery so full that
+        latecomers listened from the stairwell. Twenty-nine councillors voted to reopen the market,
+        eight against, with four abstentions.
+      </p>
+      <p>
+        The hall closed in the autumn of 2022, when inspectors found that two of its iron arches had
+        rusted through. The repairs cost more than the original estimate, and for a while the
+        council considered selling the site.
+      </p>
+      <h2>Fewer stalls, later evenings</h2>
+      <p>
+        The new plan keeps eighty stalls out of the original hundred and twelve. The space freed at
+        the river end becomes a covered square with tables, open until ten in the evening from
+        Thursday to Saturday.
+      </p>
+      <blockquote>
+        “We are not rebuilding a museum. We want people back on the quay after work.”
+      </blockquote>
+      <p>
+        Traders who held a pitch before the closure get first refusal. The remaining pitches will be
+        allocated by lot in February, with a quarter reserved for growers from within thirty
+        kilometres.
+      </p>
+      <h2>What happens next</h2>
+      <p>
+        Work on the roof resumes in November. If the winter is mild, the first market day is planned
+        for the second Saturday of April.
+      </p>
+      <p>
+        The Morning Ledger, its town, its council and its market are made up for the Unwall demo,
+        and so is the consent wall in front of this article.
+      </p>
+    </main>
+    <div class="consent-layer" id="ledger-consent">
+      <div class="consent" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+        <h2 id="consent-title">We value your privacy</h2>
+        <p>
+          We and our 842 partners store and access information on your device, such as cookies, to
+          measure audiences, personalise ads and content, and develop our services.
+        </p>
+        <p>
+          Accept all to read The Morning Ledger for free, or refuse and subscribe for 2 € per month.
+          Your choice is valid for 13 months.
+        </p>
+        <div class="choices">
+          <button type="button">Refuse and subscribe</button>
+          <button type="button">Settings</button>
+          <button type="button" class="primary">Accept all</button>
+        </div>
+        <p class="made-up">Made-up consent wall · demo</p>
+        <p class="note" hidden>
+          This wall is made up: no choice is recorded, and it stays until Unwall removes it.
+        </p>
+      </div>
+    </div>
+    <script>
+      for (const b of document.querySelectorAll(".consent button")) {
+        b.addEventListener("click", () => {
+          document.querySelector(".consent .note").hidden = false;
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Body fixed lock</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      p {
+        height: 500px;
+        margin: 0;
+        border-bottom: 1px solid #ccc;
+      }
+      .veil {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+    </style>
+  </head>
+  <body>
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <script>
+      // Reader scrolled to 1200px, then a wall locks the body at that position.
+      addEventListener("load", () => {
+        scrollTo(0, 1200);
+        setTimeout(() => {
+          document.body.style.position = "fixed";
+          document.body.style.top = "-1200px";
+          document.body.style.width = "100%";
+          const w = document.createElement("div");
+          w.className = "veil";
+          w.innerHTML =
+            '<div style="background:#fff;margin:20vh auto;width:400px;padding:20px">Vous utilisez un bloqueur de publicité. Désactivez votre adblock pour continuer. <button>OK</button></div>';
+          document.body.appendChild(w);
+        }, 200);
+      });
+    </script>
+  </body>
+</html>

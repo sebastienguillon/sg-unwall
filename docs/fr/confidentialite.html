@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Politique de confidentialité — Unwall</title>
+    <meta
+      name="description"
+      content="Ce qu’Unwall lit sur une page, ce qu’il conserve dans votre navigateur, et pourquoi il n’envoie rien nulle part."
+    />
+    <link
+      rel="canonical"
+      href="https://sebastienguillon.github.io/sg-unwall/fr/confidentialite.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://sebastienguillon.github.io/sg-unwall/privacy.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="fr"
+      href="https://sebastienguillon.github.io/sg-unwall/fr/confidentialite.html"
+    />
+    <link rel="icon" type="image/png" href="../icon.png" />
+    <link rel="stylesheet" href="../styles.css" />
+    <meta name="theme-color" content="#20231d" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Aller au contenu</a>
+    <header>
+      <div class="wrap">
+        <a class="brand" href="./"><img src="../icon.png" width="36" height="36" alt="" />Unwall</a>
+        <nav aria-label="Navigation principale">
+          <a href="./">Présentation</a
+          ><a href="confidentialite.html" aria-current="page">Confidentialité</a
+          ><a href="aide.html">Aide</a
+          ><a class="lang" href="../privacy.html" hreflang="en" lang="en">English</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main" class="wrap policy-layout" tabindex="-1">
+      <div class="page-intro">
+        <h1>Ce qu’Unwall lit, et ce qu’il conserve.</h1>
+        <p class="lead">
+          Unwall fonctionne entièrement dans votre navigateur. Il n’a ni serveur, ni statistiques,
+          ni compte, et n’envoie aucune donnée à son développeur ni à personne d’autre.
+        </p>
+        <p class="meta">Politique de confidentialité · Mise à jour le 20 octobre 2026</p>
+      </div>
+      <aside class="policy-index">
+        <nav aria-label="Sections de la politique de confidentialité">
+          <p class="index-title">Sur cette page</p>
+          <ol>
+            <li><a href="#where">Où il s’exécute</a></li>
+            <li><a href="#reads">Ce qu’il lit et pourquoi</a></li>
+            <li><a href="#stores">Ce qu’il conserve</a></li>
+            <li><a href="#sends">Ce qu’il envoie</a></li>
+            <li><a href="#permissions">Autorisations</a></li>
+            <li><a href="#choices">Vos choix</a></li>
+            <li><a href="#website">Ce site</a></li>
+            <li><a href="#questions">Questions</a></li>
+          </ol>
+        </nav>
+      </aside>
+      <div class="article policy-content">
+        <h2 id="where">Où il s’exécute</h2>
+        <p>
+          Unwall s’exécute sur les pages web que vous ouvrez en <code>http</code> ou
+          <code>https</code>, dans la page elle-même et non dans les cadres qu’elle intègre, dès que
+          la page commence à se charger. Il ne s’exécute pas sur les pages du navigateur, sur les
+          boutiques d’extensions, ni sur les fichiers ouverts depuis votre ordinateur. Tout son code
+          est dans le paquet installé ; il ne charge rien depuis internet.
+        </p>
+
+        <h2 id="reads">Ce qu’il lit et pourquoi</h2>
+        <ul>
+          <li>
+            La mise en page : quels éléments se superposent aux autres, leur taille et leur
+            position, et les styles qui bloquent le défilement ou floutent le contenu. C’est ainsi
+            qu’Unwall distingue un mur du reste de la page.
+          </li>
+          <li>
+            Le texte visible et les noms (identifiants, classes, libellés) de ces éléments, pour
+            reconnaître le vocabulaire du consentement, des abonnements, des lettres d’information
+            et des bloqueurs de publicité, en cinq langues.
+          </li>
+          <li>
+            Le bouton ou le lien sur lequel vous cliquez ou appuyez (son texte, son nom et son
+            adresse), pour laisser en place ce que vous ouvrez vous-même, comme un formulaire de
+            connexion ou les réglages de cookies du site.
+          </li>
+        </ul>
+        <p>
+          Tout cela se passe dans la page, en mémoire, et est oublié quand vous la quittez. Unwall
+          ne lit ni ce que vous saisissez dans les formulaires, ni vos cookies, ni vos mots de
+          passe, ni votre historique.
+        </p>
+
+        <h2 id="stores">Ce qu’il conserve</h2>
+        <ul>
+          <li>
+            Dans le stockage des extensions du navigateur, sur cet appareil uniquement (sans
+            synchronisation) : la liste des sites où vous avez désactivé Unwall, le fait qu’il
+            masque ou non les bandeaux de cookies qui ne bloquent pas la page, et l’activation ou
+            non du journal de débogage.
+          </li>
+          <li>
+            La liste de ce qu’Unwall a changé sur une page reste dans la mémoire de cette page, pour
+            que sa fenêtre puisse l’afficher. Elle disparaît quand vous quittez ou rechargez la
+            page.
+          </li>
+          <li>
+            Quand le journal de débogage est activé, Unwall écrit aussi cette liste dans la page,
+            comme attribut de son élément racine, et dans la console de la page, où les scripts de
+            la page pourraient la lire. Le journal de débogage est désactivé par défaut.
+          </li>
+        </ul>
+
+        <h2 id="sends">Ce qu’il envoie</h2>
+        <p>
+          Rien. Unwall ne fait aucune requête réseau : ni statistiques, ni télémétrie, ni rapports
+          de plantage. Les mises à jour passent par la boutique d’extensions de votre navigateur.
+        </p>
+
+        <h2 id="permissions">Autorisations</h2>
+        <ul>
+          <li><code>storage</code>, pour conserver les trois réglages décrits plus haut.</li>
+          <li>
+            L’accès à tous les sites. Unwall doit s’exécuter sur chaque page pour y trouver ses murs
+            ; Chrome l’affiche comme « Lire et modifier toutes vos données sur tous les sites web »,
+            Firefox comme « Accéder à vos données pour tous les sites web ». Unwall s’en sert
+            uniquement pour masquer les murs et rétablir la page comme décrit ici.
+          </li>
+          <li>Sur Firefox, Unwall déclare ne collecter aucune donnée.</li>
+        </ul>
+
+        <h2 id="choices">Vos choix</h2>
+        <p>
+          Depuis la fenêtre d’Unwall, vous pouvez le désactiver pour un site, annuler ses
+          changements sur la page en cours, ou l’empêcher de masquer les bandeaux de cookies qui ne
+          bloquent pas la page. Supprimer l’extension efface ses réglages. Rien sur vous n’est
+          conservé ailleurs.
+        </p>
+
+        <h2 id="website">Ce site</h2>
+        <p>
+          Ce site n’utilise aucune statistique et ne dépose aucun cookie. Il est hébergé sur GitHub
+          Pages ; GitHub peut enregistrer l’adresse IP des visiteurs pour des raisons de sécurité,
+          selon la
+          <a
+            href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
+            >déclaration de confidentialité de GitHub</a
+          >. La démonstration de la page d’accueil exécute le code d’Unwall sur une page inventée ;
+          son mur de consentement inventé n’enregistre rien.
+        </p>
+
+        <h2 id="questions">Questions</h2>
+        <p>
+          Posez-les dans les
+          <a href="https://github.com/sebastienguillon/sg-unwall/issues">tickets GitHub</a> du
+          projet. Les tickets sont publics : n’y mettez aucune information personnelle. La
+          <a href="aide.html">page d’aide</a> répond aux questions courantes.
+        </p>
+      </div>
+    </main>
+    <footer>
+      <div class="wrap">
+        <p>
+          Unwall est un projet indépendant de Sébastien Guillon. Il n’est lié à aucun des sites ni
+          des outils de consentement qu’il traite.
+        </p>
+        <p>
+          <a href="confidentialite.html">Politique de confidentialité</a> ·
+          <a href="aide.html">Aide</a> ·
+          <a href="https://github.com/sebastienguillon/sg-unwall">GitHub</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

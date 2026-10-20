@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+# The job only reads the repository.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Lint, format, test and validate the extension
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      # Actions are pinned to a commit, because a tag can be moved.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # package.json allows a range of pnpm versions and pnpm-lock.yaml pins the
+      # exact one. pnpm/setup only reads the range and installs its newest match,
+      # then pnpm switches itself to the pinned version and the action's version
+      # check fails. Passing the pinned version keeps the lockfile in charge.
+      - name: Read the pnpm version pinned in the lockfile
+        id: pnpm
+        run: |
+          version=$(sed -n '/packageManagerDependencies:/,/version:/s/^ *version: *//p' pnpm-lock.yaml | head -n 1 | tr -d "'\"")
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::pnpm-lock.yaml does not pin a pnpm version (found: '$version')."
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      # require-lockfile makes the install fail, rather than resolve anew, if
+      # the lockfile is missing or stale.
+      - name: Install pnpm, Node.js and dependencies
+        uses: pnpm/setup@703c52620218391530e48b9e8870d5c0082e1b9b # v2.1.0
+        with:
+          version: ${{ steps.pnpm.outputs.version }}
+          runtime: node@24
+          cache: true
+          require-lockfile: true
+
+      # The behaviour tests run the content script in both browsers.
+      - name: Install Chromium and Firefox for Playwright
+        run: pnpm exec playwright install --with-deps chromium firefox
+
+      - name: Check
+        run: pnpm check
