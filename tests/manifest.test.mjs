@@ -20,6 +20,13 @@ describe("manifest", () => {
     );
   });
 
+  test("has a summary the stores accept, as written in store/listing.en.md", async () => {
+    assert.ok(manifest.description.length <= 132, `${manifest.description.length} characters`);
+    const listing = await readFile(join(root, "store/listing.en.md"), "utf8");
+    const summary = /## Summary\n\n(.+)\n/.exec(listing)?.[1];
+    assert.equal(summary, manifest.description);
+  });
+
   test("references only files that exist", async () => {
     const files = [
       ...Object.values(manifest.icons),

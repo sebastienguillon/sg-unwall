@@ -1,5 +1,5 @@
 ---
-name: Unwall
+name: SG Unwall
 description: Paper, ink and one highlighter. The sg-x family world, extended with keys nobody presses and an ink voice that reports what it did.
 colors:
   green: "#526600"
@@ -17,7 +17,7 @@ colors:
 typography:
   display:
     fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif'
-    fontSize: "min(116px, 8vw)"
+    fontSize: "min(96px, 6.6vw)"
     fontWeight: 750
     lineHeight: 1
     letterSpacing: "-0.045em"
@@ -168,15 +168,15 @@ components:
     height: "560px"
 ---
 
-# Design System: Unwall
+# Design System: SG Unwall
 
 ## Overview
 
 **Creative North Star: "The Unpressed Page"**
 
-A reader's page in paper and ink. Whatever a site demands of the reader shows up as a key nobody presses: a pale, dashed outline at display size, drawn but inert. Unwall's own voice speaks only from ink panels with lime type, and one lime highlighter marks the answer. Everything else is quiet: warm off-white paper, olive-black ink, hairline rules, generous 17px/1.7 reading text, no shadows, no imagery beyond the mark.
+A reader's page in paper and ink. Whatever a site demands of the reader shows up as a key nobody presses: a pale, dashed outline at display size, drawn but inert. SG Unwall's own voice speaks only from ink panels with lime type, and one lime highlighter marks the answer. Everything else is quiet: warm off-white paper, olive-black ink, hairline rules, generous 17px/1.7 reading text, no shadows, no imagery beyond the mark.
 
-The world is inherited, not invented. It belongs to the sg-x family (the user's sibling extension, `sg-x/docs/styles.css`), chosen explicitly as "same family as sg-x". The shared family layer is identical value for value: paper, ink, muted, line, green, lime, tint, the selection colour, the system UI stack, the 1120px content and 720px reading widths, the section rhythm, header, footer, links, buttons, Read-page layouts and disclosures. Unwall adds four tokens and the devices built on them: the unpressed key colours (text and dashed line), the ink-panel rule and muted tokens, the switch, the readout, the ruled register, the lime highlighter under the answer, and the wash motion. Unwall extends the family without retuning any of its values.
+The world is inherited, not invented. It belongs to the sg-x family (the user's sibling extension, `sg-x/docs/styles.css`), chosen explicitly as "same family as sg-x". The shared family layer is identical value for value: paper, ink, muted, line, green, lime, tint, the selection colour, the system UI stack, the 1120px content and 720px reading widths, the section rhythm, header, footer, links, buttons, Read-page layouts and disclosures. SG Unwall adds four tokens and the devices built on them: the unpressed key colours (text and dashed line), the ink-panel rule and muted tokens, the switch, the readout, the ruled register, the lime highlighter under the answer, and the wash motion. SG Unwall extends the family without retuning any of its values.
 
 Two things sit in the repository but outside this world. The made-up newspaper inside the homepage demo (`docs/demo/demo.css`, `en.html`, `fr.html`) imitates a generic news site on purpose, with a white ground, Georgia serif, a drop-shadowed consent box and uppercase tracked datelines. It is a contained exception that lives only inside the demo frame. The extension's toolbar popup (`src/popup/`) predates this world and is not part of it.
 
@@ -186,7 +186,7 @@ Two things sit in the repository but outside this world. The made-up newspaper i
 - One type family at weights 400 to 750; display character comes from weight 750 and tracking down to -0.045em.
 - Hairline-ruled structure: sections, lists, the register and disclosures are separated by 1px rules, not boxes.
 - Unpressed keys: the site's demands rendered as dashed, inert outlines at display size.
-- Ink panels with lime type are where Unwall itself speaks.
+- Ink panels with lime type are where SG Unwall itself speaks.
 - One motion grammar: a status changes in place under a brief lime wash.
 - Every string exists in English and French; layouts are sized for the longer French.
 
@@ -200,12 +200,12 @@ A warm, low-chroma olive family on unbleached paper, with one saturated lime use
 
 ### Secondary
 
-- **Highlighter Lime** (#d5ed75): Unwall's own voice. On ink it is type and marks: the privacy panel's heading and link, the readout's verbs ("Hidden", "Unlocked", "Repaired") and change count, the switch thumb when on, the focus ring inside ink panels (12.3:1 on ink). On paper it appears only as the highlighter underline beneath the answer, and transiently as the 22% wash of the motion grammar.
+- **Highlighter Lime** (#d5ed75): SG Unwall's own voice. On ink it is type and marks: the privacy panel's heading and link, the readout's verbs ("Hidden", "Unlocked", "Repaired") and change count, the switch thumb when on, the focus ring inside ink panels (12.3:1 on ink). On paper it appears only as the highlighter underline beneath the answer, and transiently as the 22% wash of the motion grammar.
 
 ### Tertiary
 
-- **Faded Key Olive** (#868b73, Unwall addition): the text of unpressed keys. 3.2:1 on paper, so it is legal only at display size, where it always sits.
-- **Dashed Key Line** (#b9bdaa, Unwall addition): the 3px dashed outline of unpressed keys (2px under 650px). Pure decoration at 1.8:1; it carries no information.
+- **Faded Key Olive** (#868b73, SG Unwall addition): the text of unpressed keys. 3.2:1 on paper, so it is legal only at display size, where it always sits.
+- **Dashed Key Line** (#b9bdaa, SG Unwall addition): the 3px dashed outline of unpressed keys (2px under 650px). Pure decoration at 1.8:1; it carries no information.
 
 ### Neutral
 
@@ -214,15 +214,15 @@ A warm, low-chroma olive family on unbleached paper, with one saturated lime use
 - **Moss Grey** (#5c6353): secondary text, including leads, feature and list descriptions, captions, the store status, metadata, footer, inactive nav links and disclosure answers (5.7:1 on paper).
 - **Pencil Hairline** (#d5d8ca): every 1px rule. Header and footer edges, section tops, register rows, list separators, disclosure edges, the demo frame's border, the nav's language divider.
 - **Pale Sage Tint** (#e8eddb): the quiet card (support's "Report a problem"), inline code, and the secondary button's hover fill.
-- **Ink Panel Rule** (#3a3e35, Unwall addition): hairlines between readout entries on ink.
-- **Ink Panel Grey** (#b4b9a6, Unwall addition): secondary text on ink, including the readout's status sentence and per-entry details (7.9:1 on ink).
+- **Ink Panel Rule** (#3a3e35, SG Unwall addition): hairlines between readout entries on ink.
+- **Ink Panel Grey** (#b4b9a6, SG Unwall addition): secondary text on ink, including the readout's status sentence and per-entry details (7.9:1 on ink).
 - **Lime Selection** (rgb(168 199 11 / 30%)): text selection on paper, inherited from the family.
 
 ### Named Rules
 
-**The Family Rule.** The family tokens are sg-x's, value for value. Unwall adds tokens next to them and never retunes one.
+**The Family Rule.** The family tokens are sg-x's, value for value. SG Unwall adds tokens next to them and never retunes one.
 
-**The Lime Has Two Places Rule.** Lime is type and marks on ink, where Unwall speaks, and a highlighter underline on paper, once per page. It is never text on paper and never the fill of a button or card. Its only other appearance is the transient wash.
+**The Lime Has Two Places Rule.** Lime is type and marks on ink, where SG Unwall speaks, and a highlighter underline on paper, once per page. It is never text on paper and never the fill of a button or card. Its only other appearance is the transient wash.
 
 **The Unpressed Rule.** The two unpressed colours belong only to keys nobody presses. Faded Key Olive holds 3.2:1, so it never appears below display size.
 
@@ -232,22 +232,22 @@ A warm, low-chroma olive family on unbleached paper, with one saturated lime use
 **Body Font:** the same stack
 **Label/Mono Font:** none distinct; inline code uses the browser's monospace at 0.85em on tint
 
-**Character:** One family, inherited from sg-x by the user's choice of that family. Hierarchy is built from weight (400 body, 600 to 650 UI, 700 headings, 750 display and brand) and from tracking that tightens as size grows, from -0.02em at 21px to -0.045em at 116px. Headings use `text-wrap: balance`; the display headline uses `pretty`.
+**Character:** One family, inherited from sg-x by the user's choice of that family. Hierarchy is built from weight (400 body, 600 to 650 UI, 700 headings, 750 display and brand) and from tracking that tightens as size grows, from -0.02em at 21px to -0.045em at 96px. Headings use `text-wrap: balance`; the display headline uses `pretty`.
 
 ### Hierarchy
 
-- **Display** (750, min(116px, 8vw), line-height 1, -0.045em): the homepage headline only. The first line is the unpressed keys and the second line is the answer, both at the same size. French drops to min(100px, 6.9vw). Under 650px both languages use min(15vw, 64px) at -0.04em.
+- **Display** (750, min(96px, 6.6vw), line-height 1, -0.045em): the homepage headline only. The first line is the unpressed keys and the second line is the answer, both at the same size; the size keeps "SG Unwall presses neither." on one line at 1440. French uses min(100px, 6.9vw), its answer on two lines. Under 650px both languages use min(15vw, 64px) at -0.04em.
 - **Headline** (700, clamp(36px, 4.3vw, 54px), 1.14, -0.035em): the h1 of Read pages (privacy, support).
 - **Title** (700, clamp(28px, 3vw, 36px), 1.2, -0.03em): section h2s on the homepage. Inside Read-page articles h2 steps down to 26px (24px on mobile).
 - **Statement** (700, clamp(21px, 2vw, 26px), 1.2, -0.03em): the short declarative lines of the "never" list, each followed by a muted paragraph.
-- **Subtitle** (700, 21px, 1.35, -0.02em): h3s (the names in the "what Unwall clears away" list); the contact card's h2 is set to the same 21px.
+- **Subtitle** (700, 21px, 1.35, -0.02em): h3s (the names in the "what SG Unwall clears away" list); the contact card's h2 is set to the same 21px.
 - **Lead** (400, 20px, 1.65, Moss Grey): the paragraph under a headline or section title, max 65ch; 18px under 650px.
 - **Body** (400, 17px, 1.7): all reading text. Descriptive paragraphs cap at 62ch and Read pages at the 720px measure.
 - **Label** (650, 15px): buttons, the switch label and state, the text button, the live count. Disclosure summaries use 650 at body size.
 - **Nav** (600, 14px): header links.
 - **Meta** (400, 14px, 1.5): captions, the store status, the update date, the policy index. Footer runs at 13px/1.65; readout details at 12.5px.
 - **Data** (400, 15px, 1.45, tabular numerals): the register. Column heads are 700 at 13px, sentence case.
-- **Brand** (750, 23px, -0.03em; 21px on mobile): the "Unwall" wordmark beside the 36px icon.
+- **Brand** (750, 23px, -0.03em; 21px on mobile): the "SG Unwall" wordmark beside the 36px icon.
 
 ### Named Rules
 
@@ -266,7 +266,7 @@ Where two columns meet, the gap is 64px. The homepage offer pairs a 600px lead w
 Responsive behaviour:
 
 - **900px:** every two-column layout becomes one column. The readout and the policy index stop being sticky, and the index becomes a two-column grid between two hairlines.
-- **650px:** mobile. Margins drop to 20px, the headline drops to min(15vw, 64px) and key dashes thin to 2px. Install buttons stack, the demo frame drops to 520px and the footer stacks. Each register row becomes a three-line block: site and time, then page · consent tool, then what Unwall did. ARIA roles keep it a table.
+- **650px:** mobile. Margins drop to 20px, the headline drops to min(15vw, 64px) and key dashes thin to 2px. Install buttons stack, the demo frame drops to 520px and the footer stacks. Each register row becomes a three-line block: site and time, then page · consent tool, then what SG Unwall did. ARIA roles keep it a table.
 - **480px:** French keys shrink (see Typography).
 - **380px:** the nav spreads across the full width; the policy index becomes one column.
 
@@ -274,7 +274,7 @@ Touch targets are 44px minimum for links in the nav, footer, close links and pol
 
 ## Elevation & Depth
 
-The system is flat and casts no shadows. Depth is tonal and comes in three steps. Paper is the ground. Pale Sage Tint marks a quiet aside. An ink panel marks Unwall speaking. Structure comes from hairlines rather than raised surfaces. The one `box-shadow` in the system is an inset 1.5px ink line that draws an outline, used on the secondary button and the switch track. It is a border drawn without layout cost, not elevation.
+The system is flat and casts no shadows. Depth is tonal and comes in three steps. Paper is the ground. Pale Sage Tint marks a quiet aside. An ink panel marks SG Unwall speaking. Structure comes from hairlines rather than raised surfaces. The one `box-shadow` in the system is an inset 1.5px ink line that draws an outline, used on the secondary button and the switch track. It is a border drawn without layout cost, not elevation.
 
 ### Named Rules
 
@@ -316,26 +316,26 @@ Plain and solid, with no gradients, icons or uppercase.
 
 The site's two consent buttons are set as part of the h1: each label sits in a 3px dashed Dashed Key Line outline with 0.17em corners, Faded Key Olive text, and padding 0.05em 0.38em 0.13em. Keys wrap with a 0.24em gap. They are inert spans inside a heading, not buttons. They have no hover, no cursor and no focus. Visually hidden punctuation (", or", "?") keeps the heading a sentence for screen readers. The answer follows at the same size in ink, with the final words in a `<mark>` drawn as a lime underline 0.3em thick at -0.2em offset with skip-ink off, so it reads as a highlighter stroke behind the letters.
 
-### The Unwall switch (signature)
+### The SG Unwall switch (signature)
 
-A real `role="switch"` button, hidden until the script runs: the word "Unwall", a track, then the state ("Off" / "On"; "Désactivé" / "Activé"), 650 at 15px, 48px tall. Off, the track is paper with a 1.5px inset ink outline and an ink thumb. On, the track fills with ink and the lime thumb slides 30px. The thumb moves over 220ms on cubic-bezier(0.16, 1, 0.3, 1), and colours change over 160ms ease-out. These are the only transitions besides the wash, and reduced motion turns both off. While the demo page reloads, the switch is disabled with a progress cursor. An olive live count ("3 changes") sits beside it in tabular numerals.
+A real `role="switch"` button, hidden until the script runs: the word "SG Unwall", a track, then the state ("Off" / "On"; "Désactivé" / "Activé"), 650 at 15px, 48px tall. Off, the track is paper with a 1.5px inset ink outline and an ink thumb. On, the track fills with ink and the lime thumb slides 30px. The thumb moves over 220ms on cubic-bezier(0.16, 1, 0.3, 1), and colours change over 160ms ease-out. These are the only transitions besides the wash, and reduced motion turns both off. While the demo page reloads, the switch is disabled with a progress cursor. An olive live count ("3 changes") sits beside it in tabular numerals.
 
 ### The readout (signature)
 
-Unwall's voice in the demo: a 340px ink panel (12px corners, 18px 20px 8px padding), sticky beside the frame on desktop. The top row is "Unwall" in paper at 16px 750 with the lime count at 13px. Under it an Ink Panel Grey status sentence (`role="status"`) explains what is happening and, once done, summarises what Unwall did and how to undo it. Each entry sits above an Ink Panel Rule hairline: a lime verb ("Hidden", "Unlocked", "Repaired"), the thing changed in paper, and a 12.5px Ink Panel Grey detail with the evidence and the time in tabular numerals. New entries arrive under the wash.
+SG Unwall's voice in the demo: a 340px ink panel (12px corners, 18px 20px 8px padding), sticky beside the frame on desktop. The top row is "SG Unwall" in paper at 16px 750 with the lime count at 13px. Under it an Ink Panel Grey status sentence (`role="status"`) explains what is happening and, once done, summarises what SG Unwall did and how to undo it. Each entry sits above an Ink Panel Rule hairline: a lime verb ("Hidden", "Unlocked", "Repaired"), the thing changed in paper, and a 12.5px Ink Panel Grey detail with the evidence and the time in tabular numerals. New entries arrive under the wash.
 
 ### The register (signature)
 
-A ruled table of measured pages that never moves. The column heads are 13px 700 above a 1.5px ink rule. Rows have 11px vertical padding above 1px hairlines, with the site name in 650 and "What Unwall did" in Moss Grey. Times are right-aligned in tabular numerals. Each row starts in a waiting state ("Wall up" and an em dash, in Moss Grey, on top of the real text, which is hidden only visually). As the row scrolls into view, it turns to the real result under the wash, rows entering together staggered 70ms apart. The grid, row heights and order never change. Ten rows show by default and the text button reveals the rest. On mobile each row becomes a three-line block.
+A ruled table of measured pages that never moves. The column heads are 13px 700 above a 1.5px ink rule. Rows have 11px vertical padding above 1px hairlines, with the site name in 650 and "What SG Unwall did" in Moss Grey. Times are right-aligned in tabular numerals. Each row starts in a waiting state ("Wall up" and an em dash, in Moss Grey, on top of the real text, which is hidden only visually). As the row scrolls into view, it turns to the real result under the wash, rows entering together staggered 70ms apart. The grid, row heights and order never change. Ten rows show by default and the text button reveals the rest. On mobile each row becomes a three-line block.
 
 ### Ink panel (privacy note)
 
-The family's closing statement, used where Unwall states its privacy promise: an ink panel with 12px corners and 40px padding (28px 24px on mobile). A lime h2 sits on the left with a deliberate line break, and paper body text sits on the right in a 1 : 1.4 grid. Its link is lime.
+The family's closing statement, used where SG Unwall states its privacy promise: an ink panel with 12px corners and 40px padding (28px 24px on mobile). A lime h2 sits on the left with a deliberate line break, and paper body text sits on the right in a 1 : 1.4 grid. Its link is lime.
 
 ### Cards / Containers
 
 - **Corner Style:** 12px.
-- **Background:** Pale Sage Tint for the one quiet card (support's "Report a problem"); ink for Unwall's voice. No other card types exist.
+- **Background:** Pale Sage Tint for the one quiet card (support's "Report a problem"); ink for SG Unwall's voice. No other card types exist.
 - **Shadow Strategy:** none (see Elevation & Depth).
 - **Border:** none; tone does the work.
 - **Internal Padding:** 24px 28px (22px on mobile) for the tint card.
@@ -360,7 +360,7 @@ The made-up page runs in an iframe with a 1px hairline border, 12px corners, a w
 
 ### Do:
 
-- **Do** keep paper (#f6f5ef) as the only page ground, and give Unwall's own voice an ink (#20231d) panel with 12px corners and lime type.
+- **Do** keep paper (#f6f5ef) as the only page ground, and give SG Unwall's own voice an ink (#20231d) panel with 12px corners and lime type.
 - **Do** divide sections with a 1px Pencil Hairline (#d5d8ca) and clamp(40px, 5vw, 64px) of space, not with background bands or boxes.
 - **Do** draw any question the site puts to the reader as unpressed keys (3px dashed #b9bdaa, 2px under 650px, text #868b73, 0.17em corners), only at display size.
 - **Do** mark at most one answer per page with the lime highlighter: an underline 0.3em thick at -0.2em offset, skip-ink off.

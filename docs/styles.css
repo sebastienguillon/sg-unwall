@@ -531,7 +531,7 @@ footer a {
     grid-template-columns: 1fr;
   }
 }
-/* ------------------------------------------------------------ Unwall */
+/* ------------------------------------------------------------ SG Unwall */
 
 button {
   font: inherit;
@@ -561,7 +561,7 @@ header nav .lang {
   padding-block: 8px 44px;
 }
 .headline {
-  --size: min(116px, 8vw);
+  --size: min(96px, 6.6vw);
   max-width: none;
   margin: 0 0 32px;
   font-size: var(--size);
@@ -1006,7 +1006,7 @@ header nav .lang {
     height: 520px;
   }
   /* Each measured page becomes a small block: site and time, then page and
-     consent tool, then what Unwall did. The ARIA roles keep it a table. */
+     consent tool, then what SG Unwall did. The ARIA roles keep it a table. */
   .register thead {
     position: absolute;
     width: 1px;

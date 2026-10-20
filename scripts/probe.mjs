@@ -1,4 +1,4 @@
-// Loads pages with and without Unwall and reports what was hidden and whether
+// Loads pages with and without SG Unwall and reports what was hidden and whether
 // the page is usable (nothing covering the centre, wheel scrolling works).
 //
 //   pnpm probe [options] url|list...
@@ -134,10 +134,10 @@ async function extensionId(ctx) {
   const p = await ctx.newPage();
   await p.goto("chrome://extensions");
   const id = await p.evaluate(
-    async () => (await chrome.management.getAll()).find((e) => e.name === "Unwall")?.id,
+    async () => (await chrome.management.getAll()).find((e) => e.name === "SG Unwall")?.id,
   );
   await p.close();
-  if (!id) throw new Error("Unwall extension did not load");
+  if (!id) throw new Error("SG Unwall extension did not load");
   return id;
 }
 

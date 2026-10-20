@@ -8,11 +8,11 @@ web
 
 ## Users
 
-People who read news, media and everyday websites in Chrome or Firefox (desktop, and Firefox for Android) and keep hitting consent walls, cookie popups, newsletter or ad-blocker popups, and pages that refuse to scroll. Their job is to read the page they opened without being made to accept tracking or hunt for a "refuse" button. They install Unwall from the Chrome Web Store or addons.mozilla.org. No other audience is confirmed.
+People who read news, media and everyday websites in Chrome or Firefox (desktop, and Firefox for Android) and keep hitting consent walls, cookie popups, newsletter or ad-blocker popups, and pages that refuse to scroll. Their job is to read the page they opened without being made to accept tracking or hunt for a "refuse" button. They install SG Unwall from the Chrome Web Store or addons.mozilla.org. No other audience is confirmed.
 
 ## Product Purpose
 
-Unwall removes consent walls and other blocking popups, the overlays behind them, and the scroll locks they leave on `<html>`/`<body>`, as early as possible while the page loads, so the content underneath can be read and scrolled.
+SG Unwall removes consent walls and other blocking popups, the overlays behind them, and the scroll locks they leave on `<html>`/`<body>`, as early as possible while the page loads, so the content underneath can be read and scrolled.
 
 Success means:
 
@@ -22,14 +22,14 @@ Success means:
 
 ## Positioning
 
-Unwall never answers consent. It hides the wall without clicking Accept or Refuse, so the site's consent tool stays unanswered and trackers that wait for consent never get it. Tools that answer the dialog on the user's behalf cannot say this.
+SG Unwall never answers consent. It hides the wall without clicking Accept or Refuse, so the site's consent tool stays unanswered and trackers that wait for consent never get it. Tools that answer the dialog on the user's behalf cannot say this.
 
 ## Operating Context
 
 - A content script runs at `document_start` in the top frame of every http/https page. There is no background script, the only permission is `storage`, and the extension makes no network requests.
-- The toolbar popup is the only interface. It switches Unwall off for the current site, toggles the hiding of non-blocking cookie banners (on by default), turns on a debug log in the page console, hides whatever is left (**Zap now**), restores the page (**Undo on this page**), and lists every element hidden or repaired, with the reason.
+- The toolbar popup is the only interface. It switches SG Unwall off for the current site, toggles the hiding of non-blocking cookie banners (on by default), turns on a debug log in the page console, hides whatever is left (**Zap now**), restores the page (**Undo on this page**), and lists every element hidden or repaired, with the reason.
 - Settings live in the browser's extension storage: disabled sites, the banner toggle, debug.
-- Distribution: the Chrome Web Store and addons.mozilla.org, with a public GitHub Pages site (homepage, privacy policy, support) and a `PRIVACY.md`, as for the sibling extension `sg-x`.
+- Distribution: the Chrome Web Store and addons.mozilla.org, with a public GitHub Pages site (homepage, privacy policy, support) at https://sebastienguillon.github.io/sg-unwall/, as for the sibling extension `sg-x`. The store listing text is in `store/`.
 - Development: `pnpm check` (lint, format, behaviour tests in Chromium and Firefox, Mozilla's linter) and `pnpm probe` on real sites; see README.md.
 
 ## Capabilities and Constraints
@@ -53,20 +53,19 @@ Terminology: wall, overlay, popup, banner, corner box, scroll lock, signature (a
 
 Open decisions:
 
-- The store listing text, in English and French, is not written.
-- The popup is English only; the French interface is decided but not built.
-- The GitHub repository, the Pages site and the privacy policy do not exist yet.
+- The popup is English only; the French interface is decided but not built. Until it is, the stores show the English summary in every language.
+- SG Unwall is not yet submitted to the Chrome Web Store or addons.mozilla.org; the listing text is in `store/`.
 
 ## Brand Commitments
 
-- Name: **Unwall**. The repository is `sg-unwall`.
+- Name: **SG Unwall**, written in full everywhere: extension, stores, website, documentation. The repository is `sg-unwall`; the Firefox add-on ID `unwall@sebastienguillon` is an identifier, not a name, and stays.
 - Languages: the interface and the store listings are in English and French.
 - Author: Sébastien Guillon. License: MIT.
 
 ## Evidence on Hand
 
 - Behaviour tests: 67 checks in Chromium and Firefox over the pages in `tests/fixtures/`.
-- Real-site lists in `scripts/sites/`: 23 article pages the user checked by hand in a browser with and without Unwall (`articles.txt`), 26 news home pages (`homepages.txt`), 16 sites without walls (`controls.txt`). Probe screenshots and reports in `out/` are local test artifacts of third-party sites, not publishable material.
+- Real-site lists in `scripts/sites/`: 23 article pages the user checked by hand in a browser with and without SG Unwall (`articles.txt`), 26 news home pages (`homepages.txt`), 16 sites without walls (`controls.txt`). Probe screenshots and reports in `out/` are local test artifacts of third-party sites, not publishable material.
 - Existing assets: the icon source `assets/icon.svg` and its PNG exports in `src/icons/`.
 - No users, reviews, ratings, install counts, testimonials or press exist yet; none may be invented.
 
