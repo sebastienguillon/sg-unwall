@@ -1,5 +1,5 @@
 /*
- * SG Unwall content script.
+ * Tacet content script.
  *
  * Hides consent walls and other blocking popups, their overlays, and the
  * scroll locks they leave on <html>/<body>. Detection has three layers:
@@ -178,7 +178,7 @@
   let flagSeen = false; // a vendor class was on <html>/<body> at the last class change
   let freed = new WeakMap(); // element -> reasons already recorded by freeContent()
 
-  const log = (...args) => settings.debug && console.debug("[SG Unwall]", ...args);
+  const log = (...args) => settings.debug && console.debug("[Tacet]", ...args);
 
   // ---------------------------------------------------------------- helpers
 
@@ -666,7 +666,7 @@
     }
   }
 
-  // A layer the user opened, or a modal the page shows and SG Unwall left alone:
+  // A layer the user opened, or a modal the page shows and Tacet left alone:
   // the page blurs or disables its content for those on purpose.
   function layerOpen(cands) {
     for (const el of cands.keys()) {

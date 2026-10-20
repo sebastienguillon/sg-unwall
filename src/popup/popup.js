@@ -21,7 +21,7 @@ function render(st) {
   list.textContent = "";
   if (!st) {
     $("host").textContent = "";
-    $("state").textContent = "SG Unwall does not run on this page.";
+    $("state").textContent = "Tacet does not run on this page.";
     for (const id of ["site", "zap", "undo"]) $(id).disabled = true;
     return;
   }

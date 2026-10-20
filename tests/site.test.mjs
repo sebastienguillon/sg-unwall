@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
 describe("website", () => {
-  for (const file of ["unwall.js", "unwall.css"]) {
+  for (const file of ["tacet.js", "tacet.css"]) {
     test(`docs/demo/${file} is the shipped src/content/${file} (run \`pnpm site\` after changing it)`, async () => {
       const shipped = await readFile(join(root, "src/content", file), "utf8");
       const copy = await readFile(join(root, "docs/demo", file), "utf8");

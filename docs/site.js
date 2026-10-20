@@ -1,5 +1,5 @@
 // The homepage's two live parts: the demo, which runs the extension's own
-// content script (docs/demo/unwall.js, copied from src/ by `pnpm site`) on a
+// content script (docs/demo/tacet.js, copied from src/ by `pnpm site`) on a
 // made-up page, and the register of tested pages.
 "use strict";
 
@@ -10,10 +10,10 @@ const T = {
   en: {
     on: "On",
     off: "Off",
-    idle: "SG Unwall is off on this page. Try scrolling the article: the wall locks it. Then switch SG Unwall on: it runs the extension’s own code, here, on the made-up page.",
-    running: "SG Unwall is running on the made-up page…",
-    back: "SG Unwall is off again. The made-up wall is back, with its scroll lock and its blur.",
-    nothing: "SG Unwall found nothing to remove.",
+    idle: "Tacet is off on this page. Try scrolling the article: the wall locks it. Then switch Tacet on: it runs the extension’s own code, here, on the made-up page.",
+    running: "Tacet is running on the made-up page…",
+    back: "Tacet is off again. The made-up wall is back, with its scroll lock and its blur.",
+    nothing: "Tacet found nothing to remove.",
     count: (n) => `${n} change${n > 1 ? "s" : ""}`,
     hide: "Hidden",
     unlock: "Unlocked",
@@ -25,8 +25,8 @@ const T = {
     clicks: "Clicks on the page",
     aria: "The page, for screen readers",
     matched: "recognised by",
-    at: (s) => `${s} s after SG Unwall started`,
-    summary: (parts) => `SG Unwall ${list(parts, "and")}. Switch it off to put everything back.`,
+    at: (s) => `${s} s after Tacet started`,
+    summary: (parts) => `Tacet ${list(parts, "and")}. Switch it off to put everything back.`,
     saidHide: "hid the made-up consent wall",
     saidUnlock: "unlocked scrolling",
     saidFree: "cleared the blur",
@@ -48,10 +48,10 @@ const T = {
   fr: {
     on: "Activé",
     off: "Désactivé",
-    idle: "SG Unwall est désactivé sur cette page. Essayez de faire défiler l’article : le mur le bloque. Puis activez SG Unwall : c’est le code de l’extension qui s’exécute, ici, sur la page inventée.",
-    running: "SG Unwall s’exécute sur la page inventée…",
-    back: "SG Unwall est de nouveau désactivé. Le mur inventé est revenu, avec son blocage du défilement et son flou.",
-    nothing: "SG Unwall n’a rien trouvé à retirer.",
+    idle: "Tacet est désactivé sur cette page. Essayez de faire défiler l’article : le mur le bloque. Puis activez Tacet : c’est le code de l’extension qui s’exécute, ici, sur la page inventée.",
+    running: "Tacet s’exécute sur la page inventée…",
+    back: "Tacet est de nouveau désactivé. Le mur inventé est revenu, avec son blocage du défilement et son flou.",
+    nothing: "Tacet n’a rien trouvé à retirer.",
     count: (n) => `${n} changement${n > 1 ? "s" : ""}`,
     hide: "Masqué",
     unlock: "Débloqué",
@@ -63,9 +63,8 @@ const T = {
     clicks: "Les clics sur la page",
     aria: "La page, pour les lecteurs d’écran",
     matched: "reconnu grâce à",
-    at: (s) => `${s.replace(".", ",")} s après le démarrage de SG Unwall`,
-    summary: (parts) =>
-      `SG Unwall a ${list(parts, "et")}. Désactivez-le pour tout remettre en place.`,
+    at: (s) => `${s.replace(".", ",")} s après le démarrage de Tacet`,
+    summary: (parts) => `Tacet a ${list(parts, "et")}. Désactivez-le pour tout remettre en place.`,
     saidHide: "masqué le mur de consentement inventé",
     saidUnlock: "débloqué le défilement",
     saidFree: "retiré le flou",
@@ -200,9 +199,9 @@ function setupDemo() {
     win.__unwallTest = true;
     const css = doc.createElement("link");
     css.rel = "stylesheet";
-    css.href = "unwall.css";
+    css.href = "tacet.css";
     const js = doc.createElement("script");
-    js.src = "unwall.js";
+    js.src = "tacet.js";
     doc.head.append(css, js);
   };
 
@@ -251,7 +250,7 @@ function setupRegister() {
     table.closest(".register-wrap").after(more);
   }
 
-  // Each row first shows the wall, then turns to what SG Unwall did as it scrolls
+  // Each row first shows the wall, then turns to what Tacet did as it scrolls
   // into view. Only the eye sees the waiting state; the cells keep their text.
   if (reducedMotion || !("IntersectionObserver" in window)) return;
   for (const row of rows) {

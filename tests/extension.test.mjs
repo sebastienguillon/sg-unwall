@@ -15,8 +15,8 @@ const demoPage = (lang) => pathToFileURL(resolve(here, "../docs/demo", `${lang}.
 
 // Injected into the page world, where the extension APIs do not exist: the script
 // then runs in test mode and exposes globalThis.__unwall.
-const js = await readFile(join(SRC, "content/unwall.js"), "utf8");
-const css = await readFile(join(SRC, "content/unwall.css"), "utf8");
+const js = await readFile(join(SRC, "content/tacet.js"), "utf8");
+const css = await readFile(join(SRC, "content/tacet.css"), "utf8");
 const init = `globalThis.__unwallTest = true;
 (() => { const add = () => { const s = document.createElement('style'); s.textContent = ${JSON.stringify(css)}; document.documentElement.appendChild(s); };
   if (document.documentElement) add();

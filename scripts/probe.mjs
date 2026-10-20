@@ -1,4 +1,4 @@
-// Loads pages with and without SG Unwall and reports what was hidden and whether
+// Loads pages with and without Tacet and reports what was hidden and whether
 // the page is usable (nothing covering the centre, wheel scrolling works).
 //
 //   pnpm probe [options] url|list...
@@ -119,8 +119,8 @@ async function measure(page) {
 }
 
 async function injectScript() {
-  const js = await readFile(join(EXT, "content/unwall.js"), "utf8");
-  const css = await readFile(join(EXT, "content/unwall.css"), "utf8");
+  const js = await readFile(join(EXT, "content/tacet.js"), "utf8");
+  const css = await readFile(join(EXT, "content/tacet.css"), "utf8");
   return `globalThis.__unwallTest = true; globalThis.__unwallNoSig = ${noSig};
 (() => { const css = ${JSON.stringify(css)};
   const add = () => { const s = document.createElement('style'); s.textContent = css; document.documentElement.appendChild(s); };
@@ -134,10 +134,10 @@ async function extensionId(ctx) {
   const p = await ctx.newPage();
   await p.goto("chrome://extensions");
   const id = await p.evaluate(
-    async () => (await chrome.management.getAll()).find((e) => e.name === "SG Unwall")?.id,
+    async () => (await chrome.management.getAll()).find((e) => e.name === "Tacet")?.id,
   );
   await p.close();
-  if (!id) throw new Error("SG Unwall extension did not load");
+  if (!id) throw new Error("Tacet extension did not load");
   return id;
 }
 

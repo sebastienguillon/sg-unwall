@@ -7,6 +7,6 @@ import { fileURLToPath } from "node:url";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 await mkdir(join(root, "docs/demo"), { recursive: true });
-for (const file of ["unwall.js", "unwall.css"]) {
+for (const file of ["tacet.js", "tacet.css"]) {
   await copyFile(join(root, "src/content", file), join(root, "docs/demo", file));
 }

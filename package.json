@@ -1,5 +1,5 @@
 {
-  "name": "sg-unwall",
+  "name": "tacet",
   "version": "2026.10.20",
   "private": true,
   "description": "A Manifest V3 browser extension that removes consent walls and other blocking popups, their overlays, and the scroll locks they leave behind.",
@@ -20,7 +20,7 @@
     "screenshots": "node scripts/screenshots.mjs",
     "site": "node scripts/site.mjs",
     "site:serve": "python3 -m http.server 8766 --bind 127.0.0.1 --directory docs",
-    "package": "pnpm run check && web-ext build --source-dir src --artifacts-dir web-ext-artifacts --overwrite-dest --filename sg-unwall-{version}.zip"
+    "package": "pnpm run check && web-ext build --source-dir src --artifacts-dir web-ext-artifacts --overwrite-dest --filename tacet-{version}.zip"
   },
   "devDependencies": {
     "oxfmt": "^0.66.0",

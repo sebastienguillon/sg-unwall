@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "SG Unwall",
+  "name": "Tacet",
   "version": "2026.10.20",
   "description": "Hides consent walls, cookie popups and the scroll locks they leave, without clicking Accept or Refuse.",
   "icons": {
@@ -15,12 +15,12 @@
       "matches": ["http://*/*", "https://*/*"],
       "run_at": "document_start",
       "all_frames": false,
-      "css": ["content/unwall.css"],
-      "js": ["content/unwall.js"]
+      "css": ["content/tacet.css"],
+      "js": ["content/tacet.js"]
     }
   ],
   "action": {
-    "default_title": "SG Unwall",
+    "default_title": "Tacet",
     "default_popup": "popup/popup.html",
     "default_icon": {
       "16": "icons/icon-16.png",

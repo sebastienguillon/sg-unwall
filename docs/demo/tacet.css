@@ -1,5 +1,5 @@
 /*
- * Helper rules driven by attributes that content/unwall.js sets.
+ * Helper rules driven by attributes that content/tacet.js sets.
  * The doubled :not(#\#) adds two ID-levels of specificity so these
  * !important rules beat the page's own !important lock rules.
  */

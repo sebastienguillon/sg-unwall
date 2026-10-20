@@ -1,6 +1,6 @@
 // Store screenshots (1280x800 JPEG) of the made-up newspaper on the website's
 // demo page, which carries a made-up consent wall: once as a browser without
-// SG Unwall shows it, once with the real unpacked extension and its popup.
+// Tacet shows it, once with the real unpacked extension and its popup.
 //   pnpm screenshots            English page, written to store/screenshots/
 //   pnpm screenshots fr         French page
 //
@@ -17,14 +17,14 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const EXT = join(root, "src");
 const OUT = join(root, "store/screenshots");
 const lang = process.argv[2] === "fr" ? "fr" : "en";
-const PAGE = `https://sebastienguillon.github.io/sg-unwall/demo/${lang}.html`;
+const PAGE = `https://sebastienguillon.github.io/tacet/demo/${lang}.html`;
 const VIEWPORT = { width: 1280, height: 800 };
 const CHROME_UA =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36";
 
 await mkdir(OUT, { recursive: true });
 
-// 1. The page as a browser without SG Unwall shows it.
+// 1. The page as a browser without Tacet shows it.
 const plain = await chromium.launch();
 const before = await plain.newPage({ viewport: VIEWPORT, userAgent: CHROME_UA });
 await before.goto(PAGE, { waitUntil: "load" });
@@ -47,9 +47,9 @@ const ctx = await chromium.launchPersistentContext(profile, {
 const ext = await ctx.newPage();
 await ext.goto("chrome://extensions");
 const id = await ext.evaluate(
-  async () => (await chrome.management.getAll()).find((e) => e.name === "SG Unwall")?.id,
+  async () => (await chrome.management.getAll()).find((e) => e.name === "Tacet")?.id,
 );
-if (!id) throw new Error("SG Unwall extension did not load");
+if (!id) throw new Error("Tacet extension did not load");
 const page = await ctx.newPage();
 await page.goto(PAGE, { waitUntil: "load" });
 await page.waitForTimeout(2000);
@@ -70,7 +70,7 @@ const status = await ext.evaluate(async () => {
 });
 await ctx.close();
 await rm(profile, { recursive: true, force: true });
-if (!status?.actions?.length) throw new Error("SG Unwall did nothing on the demo page");
+if (!status?.actions?.length) throw new Error("Tacet did nothing on the demo page");
 
 // 3. The popup, rendered by its own code with that status.
 const popup = await plain.newPage({ viewport: { width: 340, height: 200 } });
@@ -94,7 +94,7 @@ await sheet.setContent(`<style>
     box-shadow: 0 2px 6px rgb(0 0 0 / 18%), 0 12px 32px rgb(0 0 0 / 22%); }
 </style><img class="page" src="${img(after)}"><img class="popup" src="${img(panel)}">`);
 await sheet.screenshot({
-  path: join(OUT, `${lang}-2-unwall-1280x800.jpg`),
+  path: join(OUT, `${lang}-2-tacet-1280x800.jpg`),
   type: "jpeg",
   quality: 90,
 });
